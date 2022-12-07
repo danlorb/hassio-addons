@@ -4,11 +4,7 @@ slug: technitium
 name: Technitium DNS Server
 description: Self host a DNS server for privacy & security
 url: https://git.x-breitschaft.de/smarthome/hassio-addons
-codenotary: notary@home-assistant.io
 arch:
-  - armhf
-  - armv7
-  - aarch64
   - amd64
   - i386
 image: homeassistant/{arch}-addon-technitium

@@ -25,6 +25,10 @@ RUN wget https://packages.microsoft.com/config/debian/11/packages-microsoft-prod
 	    /root/.cache \
 	    /root/go
 
+RUN wget https://download.technitium.com/dns/DnsServerPortable.tar.gz \
+    && mkdir -p /etc/dns/ \
+    && tar -zxf DnsServerPortable.tar.gz -C /etc/dns/
+
 # Copy rootfs
 COPY rootfs /
 
