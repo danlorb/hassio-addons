@@ -1,0 +1,30 @@
+---
+version: 10.0.1
+slug: technitium
+name: Technitium DNS Server
+description: Self host a DNS server for privacy & security
+url: https://git.x-breitschaft.de/smarthome/hassio-addons
+codenotary: notary@home-assistant.io
+arch:
+  - armhf
+  - armv7
+  - aarch64
+  - amd64
+  - i386
+image: homeassistant/{arch}-addon-technitium
+options:
+  enable_tls: false
+ports:
+  5380/tcp: 5380
+  53/tcp: 53
+  53/udp: 53
+  8053/tcp: 8053
+  853/tcp: 853
+  80/tcp: 80
+  443/tcp: 443
+schema:
+  enable_tls: bool
+  debug: bool?
+startup: system
+watchdog: tcp://[HOST]:5380
+init: false
