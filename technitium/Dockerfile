@@ -1,5 +1,5 @@
-ARG BUILD_FROM
-FROM $BUILD_FROM
+ARG BUILD_FROM=ghcr.io/home-assistant/amd64-base-debian:bullseye
+FROM ${BUILD_FROM}
 
 WORKDIR /tmp
 

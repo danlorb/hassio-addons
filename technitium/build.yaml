@@ -1,4 +1,0 @@
----
-build_from:
-  amd64: ghcr.io/home-assistant/amd64-base-debian:bullseye
-  i386: ghcr.io/home-assistant/i386-base-debian:bullseye
