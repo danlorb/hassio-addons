@@ -29,7 +29,7 @@ ports_description:
 options:
   hetzner_api_token: null
 schema:
-  hetzner_api_token: password?
+  hetzner_api_token: "password?"
   debug: bool?
 watchdog: tcp://[HOST]:5380
 webui: "http://[IP]:[PORT:5380]"
