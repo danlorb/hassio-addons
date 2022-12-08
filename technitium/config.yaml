@@ -2,14 +2,16 @@
 name: Technitium DNS Server
 version: 10.0.1
 slug: technitium
-description: Self host a DNS server for privacy & security
+description: >-
+  Self host a DNS server for privacy & security
 url: https://git.x-breitschaft.de/smarthome/hassio-addons
 arch:
   - amd64
 codenotary: breitschaftroland@gmail.com
 host_network: false
 startup: system
-init: false
+init: true
+advanced: true
 ports:
   5380/tcp: 5380
   53/tcp: 53
@@ -18,18 +20,11 @@ ports:
   853/tcp: null
   80/tcp: null
   443/tcp: null
-ports_description:
-  5380/tcp: Specify the TCP port number for this web console over HTTP protocol.
-  53/tcp: Local TCP Port you want the DNS Server to listen for requests.
-  53/udp: Local UDP Port you want the DNS Server to listen for requests.
-  8053/tcp: Enable this option to accept DNS-over-HTTP requests for both wire and json response formats. It must be used with a TLS terminating reverse proxy like nginx and will work only on private networks.
-  853/tcp: Enable this option to accept DNS-over-TLS requests.
-  80/tcp: Enable this option to accept DNS-over-HTTPS requests for both wire and json response formats.
-  443/tcp: Enable this option to accept DNS-over-HTTPS requests for both wire and json response formats.
 options:
   hetzner_api_token: null
 schema:
-  hetzner_api_token: "password?"
+  hetzner_api_token: password?
   debug: bool?
+  log_level: list(trace|debug|info|notice|warning|error|fatal)?
 watchdog: tcp://[HOST]:5380
 webui: "http://[HOST]:[PORT:5380]"

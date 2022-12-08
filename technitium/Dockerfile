@@ -1,5 +1,6 @@
-ARG BUILD_FROM=ghcr.io/home-assistant/amd64-base-debian:bullseye
-FROM technitium/dns-server:latest
+ARG BUILD_FROM
+ARG BUILD_VERSION
+FROM ${BUILD_FROM}:${BUILD_VERSION}
 
 RUN apt-get update \
     && apt-get install -qy --no-install-recommends \
@@ -22,3 +23,8 @@ RUN apt-get update \
 COPY rootfs /
 
 WORKDIR /
+
+LABEL \
+  io.hass.version="2022.12.0" \
+  io.hass.type="addon" \
+  io.hass.arch="amd64"
