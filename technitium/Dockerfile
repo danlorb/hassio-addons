@@ -17,6 +17,8 @@ RUN apt-get update \
 
 WORKDIR /
 
+RUN chmod 777 /etc/dns/start.sh
+ENTRYPOINT [ "/etc/dns/start.sh" ]
 
 ARG BUILD_ARCH
 ARG BUILD_DATE
@@ -31,15 +33,15 @@ LABEL \
     io.hass.arch="${BUILD_ARCH}" \
     io.hass.type="addon" \
     io.hass.version=${BUILD_VERSION} \
-    maintainer="alexbelgium (https://github.com/alexbelgium)" \
+    maintainer="rolbre (https://github.com/rolbre)" \
     org.opencontainers.image.title="${BUILD_NAME}" \
     org.opencontainers.image.description="${BUILD_DESCRIPTION}" \
     org.opencontainers.image.vendor="Home Assistant Add-ons" \
-    org.opencontainers.image.authors="alexbelgium (https://github.com/alexbelgium)" \
+    org.opencontainers.image.authors="rolbre (https://github.com/rolbre)" \
     org.opencontainers.image.licenses="MIT" \
-    org.opencontainers.image.url="https://github.com/alexbelgium" \
-    org.opencontainers.image.source="https://github.com/${BUILD_REPOSITORY}" \
-    org.opencontainers.image.documentation="https://github.com/${BUILD_REPOSITORY}/blob/main/README.md" \
+    org.opencontainers.image.url="https://github.com/rolbre" \
+    org.opencontainers.image.source="https://git.x-breitschaft.de/smarthome/hassio-addons/src/branch/main/technitium" \
+    org.opencontainers.image.documentation="https://git.x-breitschaft.de/smarthome/hassio-addons/src/branch/main/technitium/README.md" \
     org.opencontainers.image.created=${BUILD_DATE} \
     org.opencontainers.image.revision=${BUILD_REF} \
     org.opencontainers.image.version=${BUILD_VERSION}

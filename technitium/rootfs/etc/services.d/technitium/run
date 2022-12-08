@@ -1,7 +1,0 @@
-#!/usr/bin/with-contenv bashio
-# ==============================================================================
-# Runs Technitium
-# ==============================================================================
-
-bashio::log.info "Starting Technitium DNS Server ..."
-exec /etc/dns/start.sh
