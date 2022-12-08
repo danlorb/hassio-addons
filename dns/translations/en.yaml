@@ -1,0 +1,6 @@
+network:
+  5380/tcp: Specify the TCP port number for the Web console
+  53/tcp: Local TCP Port for DNS Server to listen for requests
+  53/udp: Local UDP Port for DNS Server to listen for requests
+  67/udp: Local UDP Port for DHCP Server to listen for requests
+  68/udp: Local UDP Port for DHCP Server to listen for requests

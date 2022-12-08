@@ -1,0 +1,8 @@
+#!/command/with-contenv bashio
+# ==============================================================================
+# Home Assistant Community Add-on: Dns/Dhcp Server
+# Runs the Dns/Dhcp Server
+# ==============================================================================
+
+bashio::log.info "Starting Dns/Dhcp Server..."
+exec /usr/bin/dotnet /opt/dns/DnsServerApp.dll

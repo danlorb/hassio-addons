@@ -1,6 +1,6 @@
 #include <tunables/global>
 
-profile technitium flags=(attach_disconnected,mediate_deleted) {
+profile dns flags=(attach_disconnected,mediate_deleted) {
   #include <abstractions/base>
 
   # Capabilities
@@ -19,30 +19,30 @@ profile technitium flags=(attach_disconnected,mediate_deleted) {
   # network netlink raw,
   #network unix dgram,
 
-  #capability setgid,
-  #capability setuid,
+  # capability setgid,
+  # capability setuid,
   # capability sys_admin,
   # capability dac_read_search,
   # capability dac_override,
   # capability sys_rawio,
 
   # S6-Overlay
-  #/init ix,
+  /init ix,
   /bin/** ix,
   /usr/bin/** ix,
-  #/run/{s6,s6-rc*,service}/** ix,
-  #/package/** ix,
-  #/command/** ix,
-  #/etc/services.d/** rwix,
-  #/etc/cont-init.d/** rwix,
-  #/etc/cont-finish.d/** rwix,
-  #/run/{,**} rwk,
+  /run/{s6,s6-rc*,service}/** ix,
+  /package/** ix,
+  /command/** ix,
+  /etc/services.d/** rwix,
+  /etc/cont-init.d/** rwix,
+  /etc/cont-finish.d/** rwix,
+  /run/{,**} rwk,
   /dev/tty rw,
-  #/etc/s6/** rix,
-  #/run/s6/** rix,
+  /etc/s6/** rix,
+  /run/s6/** rix,
 
   # Bashio
-  # /usr/lib/bashio/** ix,
+  /usr/lib/bashio/** ix,
 
   /var/run/** mrwkl,
   /var/run/ mrwkl,

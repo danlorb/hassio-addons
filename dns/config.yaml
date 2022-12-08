@@ -1,31 +1,27 @@
 ---
-name: Technitium DNS Server
+name: Dns/Dhcp Server
 version: 10.0.1
-slug: technitium
+slug: dns
 description: >-
-  Self host a DNS server for privacy & security
+  Self host a Dns/Dhcp server for privacy & security
 url: https://git.x-breitschaft.de/smarthome/hassio-addons
 arch:
   - amd64
 codenotary: breitschaftroland@gmail.com
 host_network: false
 startup: system
-init: true
+init: false
 advanced: true
+apparmor: true
 map:
   - config:rw
 ports:
   5380/tcp: 5380
   53/tcp: 53
   53/udp: 53
-  8053/tcp: null
-  853/tcp: null
-  80/tcp: null
-  443/tcp: null
-options:
-  hetzner_api_token: null
+  67/udp: 67
+  68/udp: 68
 schema:
-  hetzner_api_token: password?
   debug: bool?
   log_level: list(trace|debug|info|notice|warning|error|fatal)?
 watchdog: tcp://[HOST]:5380
