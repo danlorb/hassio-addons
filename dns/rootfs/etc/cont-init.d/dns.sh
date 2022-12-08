@@ -5,7 +5,9 @@
 # ==============================================================================
 
 # Ensure configuration exists
-if ! bashio::fs.directory_exists '/config/addons'; then
+if ! bashio::fs.directory_exists '/config/addons/dns'; then
+    bashio::log.info "Prepare Configuration for Dns/Dhcp Server ..."
+    
     mkdir -p /config/addons \
         || bashio::exit.nok "Failed to create Dns/Dhcp configuration directory"
 

@@ -1,6 +1,6 @@
 ---
 name: Dns/Dhcp Server
-version: 0.1.0
+version: 0.1.1
 stage: experimental
 slug: dns
 description: >-
