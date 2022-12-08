@@ -12,6 +12,8 @@ host_network: false
 startup: system
 init: true
 advanced: true
+map:
+  - config:rw
 ports:
   5380/tcp: 5380
   53/tcp: 53

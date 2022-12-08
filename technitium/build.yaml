@@ -1,3 +1,5 @@
 build_from:
   amd64: technitium/dns-server
 squash: false
+codenotary:
+  signer: breitschaftroland@gmail.com
