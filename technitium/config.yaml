@@ -32,4 +32,4 @@ schema:
   hetzner_api_token: "password?"
   debug: bool?
 watchdog: tcp://[HOST]:5380
-webui: "http://[IP]:[PORT:5380]"
+webui: "http://[HOST]:[PORT:5380]"
