@@ -7,7 +7,7 @@ url: https://git.x-breitschaft.de/smarthome/hassio-addons
 arch:
   - amd64
 codenotary: breitschaftroland@gmail.com
-host_network: true
+host_network: false
 startup: system
 init: false
 ports:
@@ -26,7 +26,10 @@ ports_description:
   853/tcp: Enable this option to accept DNS-over-TLS requests.
   80/tcp: Enable this option to accept DNS-over-HTTPS requests for both wire and json response formats.
   443/tcp: Enable this option to accept DNS-over-HTTPS requests for both wire and json response formats.
+options:
+  hetzner_api_token: null
 schema:
+  hetzner_api_token: password?
   debug: bool?
 watchdog: tcp://[HOST]:5380
-webui: "[PROTO:option_name]://[HOST]:[PORT:5380]"
+webui: "http://[IP]:[PORT:5380]"
