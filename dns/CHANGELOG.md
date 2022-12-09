@@ -17,3 +17,7 @@
 ## 1.0.3
 
 - Remove `Open Web UI` Button
+
+## 1.0.4
+
+- Set AddOn to Stable

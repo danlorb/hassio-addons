@@ -1,7 +1,7 @@
 ---
 name: Dns/Dhcp Server
-version: 1.0.3
-stage: experimental
+version: 1.0.4
+stage: stable
 slug: dns
 description: >-
   Self host a Dns/Dhcp server for privacy & security
