@@ -1,6 +1,6 @@
 ---
 name: Dns/Dhcp Server
-version: 1.0.0
+version: 1.0.1
 stage: experimental
 slug: dns
 description: >-
@@ -24,25 +24,25 @@ ports:
   68/udp: 68
   8053/tcp: null
 options:
-  DNS_SERVER_DOMAIN: homeassistant.local
-  DNS_SERVER_ADMIN_PASSWORD: null
-  DNS_SERVER_FORWARDERS: null
-  DNS_SERVER_LOG_USING_LOCAL_TIME: true
+  domain: homeassistant.local
+  admin_password: null
+  forwarders: null
+  local_time: true
+  log_level: warning
 schema:
-  DNS_SERVER_DOMAIN: str
-  DNS_SERVER_ADMIN_PASSWORD: password
-  DNS_SERVER_PREFER_IPV6: bool?
-  DNS_SERVER_OPTIONAL_PROTOCOL_DNS_OVER_HTTP: bool?
-  DNS_SERVER_RECURSION: list(Allow|Deny|AllowOnlyForPrivateNetworks|UseSpecifiedNetworks)?
-  DNS_SERVER_RECURSION_DENIED_NETWORKS: str?
-  DNS_SERVER_RECURSION_ALLOWED_NETWORKS: str?
-  DNS_SERVER_ENABLE_BLOCKING: bool?
-  DNS_SERVER_ALLOW_TXT_BLOCKING_REPORT: bool?
-  DNS_SERVER_BLOCK_LIST_URLS: str?
-  DNS_SERVER_FORWARDERS: str
-  DNS_SERVER_FORWARDER_PROTOCOL: list(Udp|Tcp|Tls|Https|HttpsJson)
-  DNS_SERVER_LOG_USING_LOCAL_TIME: bool
-  debug: bool?
+  domain: str
+  admin_password: password
+  prefer_ipv6: bool?
+  dns_over_http: bool?
+  recursion: list(Allow|Deny|AllowOnlyForPrivateNetworks|UseSpecifiedNetworks)?
+  recursion_denied_networks: str?
+  recursion_allowed_networks: str?
+  enable_blocking: bool?
+  allow_txt_blocking_report: bool?
+  block_list_urls: str?
+  forwarders: str
+  forwarder_protocol: list(Udp|Tcp|Tls|Https|HttpsJson)
+  local_time: bool
   log_level: list(trace|debug|info|notice|warning|error|fatal)?
 watchdog: tcp://[HOST]:53
 webui: "http://[HOST]:[PORT:5380]"
