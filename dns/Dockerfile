@@ -17,7 +17,6 @@ COPY rootfs /
 # Corrects permissions for s6
 RUN if [ -d /etc/cont-init.d ]; then chmod -R 755 /etc/cont-init.d; fi && \
     if [ -d /etc/services.d ]; then chmod -R 755 /etc/services.d; fi && \
-    if [ -d /etc/dns ]; then chmod -R 755 /etc/dns; fi && \
     if [ -f /entrypoint.sh ]; then chmod 755 /entrypoint.sh; fi
 
 # Set Workdir
@@ -27,6 +26,7 @@ RUN apt-get update \
     && apt-get install -qy --no-install-recommends \
         apt-utils \
         wget \
+        curl \
     && wget -nv https://packages.microsoft.com/config/debian/11/packages-microsoft-prod.deb -O packages-microsoft-prod.deb \
     && dpkg -i packages-microsoft-prod.deb \
     && rm packages-microsoft-prod.deb \
@@ -50,7 +50,7 @@ RUN apt-get update \
     && chown -R root:root /opt/dns
 
 # Health check
-HEALTHCHECK --start-period=10m \
+HEALTHCHECK --start-period=5m \
     CMD curl --fail http://127.0.0.1:5380 || exit 1
 
 WORKDIR /opt/dns/

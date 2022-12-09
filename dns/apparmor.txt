@@ -50,7 +50,7 @@ profile dns flags=(attach_disconnected,mediate_deleted) {
 
   # Data access
   /data/** rw,
-  /config/** rw,
+  # /config/** rw,
 
   # Supress PTrace denials when using 'docker ps' or using 'ps' inside a container
   ptrace (trace,read) peer=docker-default,

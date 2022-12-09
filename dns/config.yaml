@@ -1,6 +1,6 @@
 ---
 name: Dns/Dhcp Server
-version: 0.1.3
+version: 1.0.0
 stage: experimental
 slug: dns
 description: >-
@@ -15,8 +15,7 @@ init: false
 advanced: true
 apparmor: true
 panel_admin: true
-map:
-  - config:rw
+backup: hot
 ports:
   5380/tcp: 5380
   53/tcp: 53
