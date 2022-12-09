@@ -5,4 +5,4 @@
 # ==============================================================================
 
 bashio::log.info "Starting Dns/Dhcp Server..."
-exec /usr/bin/dotnet /opt/dns/DnsServerApp.dll
+exec /usr/bin/dotnet /opt/dns/DnsServerApp.dll /config/addons/dns
