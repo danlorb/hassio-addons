@@ -1,6 +1,6 @@
 ---
 name: Dns/Dhcp Server
-version: 1.0.2
+version: 1.0.3
 stage: experimental
 slug: dns
 description: >-
@@ -45,4 +45,3 @@ schema:
   local_time: bool
   log_level: list(trace|debug|info|notice|warning|error|fatal)?
 watchdog: tcp://[HOST]:53
-webui: "http://[HOST]:[PORT:5380]"

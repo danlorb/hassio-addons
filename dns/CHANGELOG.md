@@ -13,3 +13,7 @@
 ## 1.0.2
 
 - Fix reading for Log Level
+
+## 1.0.3
+
+- Remove `Open Web UI` Button
