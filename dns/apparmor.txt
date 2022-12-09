@@ -4,7 +4,7 @@ profile dns flags=(attach_disconnected,mediate_deleted) {
   #include <abstractions/base>
 
   # Capabilities
-  # capability,
+  capability,
   file,
   signal,
   #mount,
@@ -12,17 +12,17 @@ profile dns flags=(attach_disconnected,mediate_deleted) {
   #remount,
   network udp,
   network tcp,
-  #network dgram,
-  #network stream,
+  network dgram,
+  network stream,
   network inet,
   network inet6,
-  # network netlink raw,
-  #network unix dgram,
+  network netlink raw,
+  network unix dgram,
 
-  # capability setgid,
-  # capability setuid,
-  # capability sys_admin,
-  # capability dac_read_search,
+  capability setgid,
+  capability setuid,
+  capability sys_admin,
+  capability dac_read_search,
   # capability dac_override,
   # capability sys_rawio,
 
@@ -46,7 +46,7 @@ profile dns flags=(attach_disconnected,mediate_deleted) {
 
   /var/run/** mrwkl,
   /var/run/ mrwkl,
-  # /dev/i2c-1 mrwkl,
+  /dev/i2c-1 mrwkl,
 
   # Data access
   /data/** rw,
