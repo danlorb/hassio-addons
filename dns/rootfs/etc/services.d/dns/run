@@ -8,7 +8,7 @@
 # Set Log Level
 if bashio::config.has_value 'log_level'; then
     bashio::log.info 'Set Log Level'
-    log_level=$(bashio::config 'local_time')
+    log_level=$(bashio::config 'log_level')
     bashio::log.level "${log_level}"
 fi
 
