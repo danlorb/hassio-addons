@@ -25,3 +25,7 @@
 ## 1.0.5
 
 - Change Network to Host Network for DHCP
+
+## 1.0.7
+
+- Enable further apparmor Settings
