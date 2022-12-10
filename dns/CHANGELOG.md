@@ -1,4 +1,5 @@
-- WARNING : update to supervisor 2022.12 before installing
+### Before you can install/update this AddOn, change DNS Setting of your Home Assistant Installation to a DNS Server Installation in your Network, which is reachable in your Network, for example `8.8.8.8` (Google DNS Server). After you have updated the AddOn change DNS Server Setting of your Home Assistant Installation to IP Adresses of this AddOn. This could be found in the Output of your Protocol.
+
 
 ## 1.0.0
 
@@ -29,3 +30,24 @@
 ## 1.0.7
 
 - Enable further apparmor Settings
+
+## 1.0.8
+
+- Fix Error in apparmor Settings
+
+## 1.0.9
+
+- Add new Options
+
+## 1.0.10
+
+- Disable AppArmor for testing
+
+## 1.0.11
+
+- Write Log for current DNS IP Address
+- Enable and Extend AppArmor Config
+
+## 1.0.12
+
+- Extend Changelog and DOCS

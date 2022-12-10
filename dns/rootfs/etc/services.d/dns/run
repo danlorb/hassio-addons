@@ -28,5 +28,10 @@ bashio::config.has_value 'forwarders' && export DNS_SERVER_FORWARDERS=$(bashio::
 bashio::config.has_value 'forwarder_protocol' && export DNS_SERVER_FORWARDER_PROTOCOL=$(bashio::config 'forwarder_protocol') && bashio::log.info 'Forwareder Protocol set'
 bashio::config.has_value 'local_time' && export DNS_SERVER_LOG_USING_LOCAL_TIME=$(bashio::config 'local_time') && bashio::log.info 'Local Time set'
 
+currentIPv4=$(hostname -i)
+currentIPv6=$(hostname -I | grep -oP '[a-f0-9:]+:+[a-f0-9]+')
+
 bashio::log.info "Starting Dns/Dhcp Server..."
+bashio::log.info "Use IP '${currentIPv4}' for Home Assistant IPv4 DNS Server Konfiguration"
+bashio::log.info "Use IP '${currentIPv6}' for Home Assistant IPv6 DNS Server Konfiguration"
 exec /usr/bin/dotnet /opt/dns/DnsServerApp.dll /data/config

@@ -1,5 +1,5 @@
 {
-    "name": "Home Assistant Private Add-ons",
-    "url": "https://git.x-breitschaft.de/smarthome/hassio-addons",
+    "name": "Home Assistant Add-ons: rolbre",
+    "url": "https://github.com/rolbre/hassio-addons",
     "maintainer": "breitschaftroland@gmail.com"
   }

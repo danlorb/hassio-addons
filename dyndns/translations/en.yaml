@@ -1,0 +1,4 @@
+configuration:
+  hetzner_api_token:
+    name: Hetzner DNS API Token
+    description: API TOKEN to access Hetzner DNS Server for DynDns Updates

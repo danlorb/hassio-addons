@@ -42,11 +42,15 @@ configuration:
     name: Log Level
     description: Choose the Log Level
 
-
-
 network:
-  5380/tcp: Specify the TCP port number for the Web console
-  53/tcp: Local TCP Port for DNS Server to listen for requests
-  53/udp: Local UDP Port for DNS Server to listen for requests
-  67/udp: Local UDP Port for DHCP Server to listen for requests
-  68/udp: Local UDP Port for DHCP Server to listen for requests
+  53/udp: DNS server port
+  53/tcp: DNS server port
+  67/udp: DHCP server port
+  68/udp: DHCP server port
+  80/tcp: DNS-over-HTTPS service certbot certificate renewal
+  443/tcp: DNS-over-HTTPS service
+  853/tcp: DNS-over-TLS service
+  5335/tcp: DNS server port Mask
+  5335/udp: DNS server port Mask
+  5380/tcp: DNS web console
+  8053/tcp: DNS-over-HTTPS using reverse proxy

@@ -2,6 +2,10 @@
 
 Technitium DNS Server is an open source authoritative as well as recursive DNS server that can be used for self hosting a Dns/Dhcp Server for privacy & security. It works out-of-the-box with no or minimal configuration and provides a user friendly web console accessible using any modern web browser. For more information, please see [Technitium DNS][dns].
 
+## Prerequesites
+
+Before you can install/update this AddOn, change DNS Setting of your Home Assistant Installation to a DNS Server Installation in your Network, which is reachable in your Network, for example `8.8.8.8` (Google DNS Server). After you have updated the AddOn change DNS Server Setting of your Home Assistant Installation to IP Adresses of this AddOn. This could be found in the Output of your Protocol.
+
 ## Installation
 
 The installation of this add-on is pretty straightforward and not different in

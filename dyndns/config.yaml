@@ -1,0 +1,31 @@
+---
+name: DynDns
+version: 1.0
+slug: dyndns
+description: >-
+  DynDns for Hetzner Dns Server
+url: https://git.x-breitschaft.de/smarthome/hassio-addons
+arch:
+  - amd64
+codenotary: breitschaftroland@gmail.com
+host_network: false
+startup: system
+init: true
+advanced: true
+apparmor: false
+options:
+  cron: "* */1 * *"
+  domains:
+    - domain: sample.domain
+      records:
+        - record: "*"
+          ttl: 3600
+schema:
+  hetznerapitoken: str?
+  cron: str?
+  domains:
+    - domain: str?
+      records:
+        - record: str?
+          ttl: int?
+  log_level: list(trace|debug|info|notice|warning|error|fatal)?
