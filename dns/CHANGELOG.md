@@ -51,3 +51,7 @@
 ## 1.0.12
 
 - Extend Changelog and DOCS
+
+## 1.0.13
+
+- Add Warning for Auto Update Function

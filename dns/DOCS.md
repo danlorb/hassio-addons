@@ -25,6 +25,10 @@ comparison to installing any other Home Assistant add-on.
 **Note**: The add-on is **pre-configured** out of the box! There is no need
 to add/change/update the server connection settings!
 
+## Post Installation
+
+Do not use the **Auto Update** Function of the addon. This could break your Home Assitant Installation.
+
 ## Configuration
 
 **Note**: _Remember to restart the add-on when the configuration is changed._
