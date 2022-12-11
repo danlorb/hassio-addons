@@ -13,7 +13,9 @@ record_type=${HETZNER_RECORD_TYPE:-'A'}
 my_fritz_fqdn=${MY_FRITZ_FQDN:-''}
 zone_id=
 record_id=
-
+cur_pub_addr=
+ipPrefix="IPv4"
+queryResult=
 headerContentType="Content-Type: application/json"
 headerAuth="Auth-API-Token: ${auth_api_token}"
 
@@ -101,11 +103,12 @@ zone_id=$(bashio::jq "${zone_info}" '.zones[] | select(.name=="'"${zone_name}"'"
 
 bashio::log.debug "Zone_ID: ${zone_id}"
 bashio::log.debug "Zone_Name: ${zone_name}"
+bashio::log.debug "Record_Name: ${record_name}"
+bashio::log.debug "Record_Type: ${record_type}"
+bashio::log.debug "Record_TTL: ${record_ttl}"
+bashio::log.debug "My_Fritz_FQDN: ${my_fritz_fqdn}"
 
 bashio::log.debug "Get current public ip address"
-ipPrefix="IPv4"
-queryResult=
-
 if [ "${my_fritz_fqdn}" == "" ]; then
     bashio::log.debug "Use whoami Service from Cloudflare to determine public IP Address"
     if [ "${record_type}" = "AAAA" ]; then
@@ -134,8 +137,8 @@ else
     fi
 fi
 
-cur_pub_addr=
-if [ "${queryResult}" != "" ]; then
+
+if [ "${queryResult}" != "" ] && [ "${queryResult}" != "\"\"" ]; then
     bashio::log.debug "QueryResult: ${queryResult}"
     timedOut=$(echo "${queryResult}" | grep -i "connection timed out" || true)
     if [ "${timedOut}" == "" ]; then
