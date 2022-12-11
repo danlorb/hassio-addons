@@ -1,6 +1,6 @@
 ---
 name: DynDns
-version: 0.1.0
+version: 0.1.1
 stage: experimental
 slug: dyndns
 description: >-
@@ -10,7 +10,7 @@ arch:
   - amd64
 codenotary: breitschaftroland@gmail.com
 host_network: false
-startup: service
+startup: services
 init: false
 advanced: true
 apparmor: true
