@@ -57,3 +57,8 @@
 
 - Update Doku
 - Add Dev Container for Development
+
+## 1.1.0
+
+- Enable Port 80 and 443
+- Add `logs` and `stats` to Backup Excludes
