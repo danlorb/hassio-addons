@@ -1,6 +1,6 @@
 ---
 name: DynDns
-version: 0.1.1
+version: 0.1.2
 stage: experimental
 slug: dyndns
 description: >-
@@ -18,15 +18,20 @@ homeassistant: 2022.11.0
 panel_admin: true
 backup: hot
 options:
+  api_token: null
+  records:
+    - domain: "my-domain.com"
+      name: www
+      ttl: 3600
+      type: A
   interval: 1h
   log_level: info
 schema:
   api_token: str
   interval: str
-  domains:
-    - domain: str?
-      records:
-        - record: str?
-          ttl: number?
-          type: str?
+  records:
+    - domain: str
+      name: str
+      ttl: int?
+      type: str?
   log_level: list(trace|debug|info|notice|warning|error|fatal)?

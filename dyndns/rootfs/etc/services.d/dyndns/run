@@ -10,7 +10,7 @@ bashio::log.level "$(bashio::config 'log_level' 'warning')"
 bashio::log.info "Load DynDns Configuration..."
 if bashio::config.has_value 'api_token'; then
 
-    if bashio::config.has_value 'domains'; then
+    if bashio::config.has_value 'records'; then
 
         bashio::log.trace "Read API Token"
         apiToken=$(bashio::config 'api_token')
@@ -20,18 +20,16 @@ if bashio::config.has_value 'api_token'; then
         interval=$(bashio::config 'interval' '1h')
 
         while true; do
-            for domainAsJson in $(bashio::config 'domains'); do
-                domain=$(bashio::jq "${domainAsJson}" ".domain")
+            for recordAsJson in $(bashio::config 'records'); do
+                domain=$(bashio::jq "${recordAsJson}" ".domain")
+                record=$(bashio::jq "${recordAsJson}" ".name")
+                ttl=$(bashio::jq "${recordAsJson}" ".ttl")
+                type=$(bashio::jq "${recordAsJson}" ".type")
+
                 bashio::log.info "Execute DynDns Update for Domain '${domain}'"
+                bashio::log.info "Update Record '${record}' with TTL ${ttl} and Type ${type}"
 
-                for recordAsJson in $(bashio::jq "${domainAsJson}" ".records[]"); do
-                    record=$(bashio::jq "${recordAsJson}" ".record")
-                    ttl=$(bashio::jq "${recordAsJson}" ".ttl")
-                    type=$(bashio::jq "${recordAsJson}" ".type")
-
-                    bashio::log.info "Update Record '${record}' with TTL ${ttl} and Type ${type}"
-                    /usr/bin/bashio /etc/dyndns/dyndns.sh -Z "${domain}" -n "${record}" -t "${ttl}" -T "${type}"
-                done
+                /usr/bin/bashio /etc/dyndns/dyndns.sh -Z "${domain}" -n "${record}" -t "${ttl}" -T "${type}"
             done
 
             sleep "${interval}"
@@ -39,6 +37,6 @@ if bashio::config.has_value 'api_token'; then
     fi
 
 else
-    bashio:log.fatal "No API Token found."
+    bashio::log.fatal "No API Token found."
     bashio::exit.nok
 fi

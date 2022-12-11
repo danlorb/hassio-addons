@@ -1,21 +1,18 @@
 {
-    "api_token": "",
+    "api_token": "dasfas",
     "interval": "10s",
-    "domains": [
+    "records": [
         {
             "domain": "domain.de",
-            "records": [
-                {
-                    "record": "wwwtest",
-                    "ttl": 3600,
-                    "type": "A"
-                },
-                {
-                    "record": "wwwtest",
-                    "ttl": 3600,
-                    "type": "AAAA"
-                }
-            ]
+            "name": "wwwtest",
+            "ttl": 3600,
+            "type": "A"
+        },
+        {
+            "domain": "domain.de",
+            "name": "wwwtest",
+            "ttl": 3600,
+            "type": "AAAA"
         }
     ],
     "log_level": "info"
