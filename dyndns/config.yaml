@@ -1,7 +1,7 @@
 ---
 name: DynDns
-version: 0.1.8
-stage: experimental
+version: 1.0.0
+stage: stable
 slug: dyndns
 description: >-
   DynDns Updater for Hetzner Dns Server
