@@ -25,10 +25,8 @@ WORKDIR /tmp
 
 RUN apt-get update \
     && apt-get install -qy --no-install-recommends \
-        apt-utils \
         dnsutils \
     && apt-get purge -y --auto-remove \
-        apt-utils \
     && apt-get clean \
     && rm -rf \
         /etc/logrotate.d \

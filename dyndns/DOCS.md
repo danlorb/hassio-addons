@@ -28,21 +28,18 @@ comparison to installing any other Home Assistant add-on.
 Example add-on configuration:
 
 ```yaml
-api_token: 
-domain: homeassistant.local
-admin_password: Supercalifragilisticexpialidocious
-forwarders: "192.168.0.1, 192.168.0.2"
-local_time: true
-forwarder_protocol: Udp
-prefer_ipv6: true
-dns_over_http: true
-recursion: AllowOnlyForPrivateNetworks
-recursion_denied_networks: "192.168.0.100, 192.168.0.110"
-recursion_allowed_networks: "192.168.0.200, 192.168.0.210"
-enable_blocking: true
-allow_txt_blocking_report: true
-block_list_urls: "www.google.com, www.microsoft.com"
-log_level: warning
+api_token:
+records:
+  - domain: my-domain.com
+    name: www
+    ttl: 3600
+    ipv4: true
+    ipv6: true
+  - domain: my-domain.com
+    name: "*"
+    ttl: 3600
+interval: 1h
+log_level: info
 ```
 
 **Note**: _This is just an example, don't copy and paste it! Create your own!_
@@ -65,65 +62,47 @@ more severe level, e.g., `debug` also shows `info` messages. By default,
 the `log_level` is set to `info`, which is the recommended setting unless
 you are troubleshooting.
 
+### Option: `api_token`
+
+Hetzner DNS API Token to access Hetzner DNS Server
+
+### Option: `interval`
+
+Interval to look for new Public IP Addresses
+
+### Option: `records`
+
+Collection of DNS Entries to update
+
 ### Option: `domain`
 
-The primary domain name used by this DNS Server to identify itself
+Domain Name which must exist in Hetzner DNS
 
-### Option: `admin_password`
+### Option: `name`
 
-The DNS web console admin user password
+DNS Record Name which should updated. If Record Name not exists it will created
 
-### Option: `prefer_ipv6`
+### Option: `ttl`
 
-DNS Server will use IPv6 for querying whenever possible with this option enabled. Set it `true` to enable it, `false` otherwise.
+TTL for the Record Name. Default is 3600
 
-### Option: `dns_over_http`
+### Option: `ipv4`
 
-Enables DNS server optional protocol DNS-over-HTTP on TCP port 8053 to be used with a TLS terminating reverse proxy like nginx. Set it `true` to enable it, `false` otherwise
+Update only `A` Records
 
-**Note**: _Do not forget to configure the Port for this. Otherwise this will not work_
+**Note**: _If **ipv4** and **ipv6** not given, both Record Types will updated_
 
-### Option: `recursion`
+### Option: `ipv6`
 
-Recursion options are Allow, Deny, AllowOnlyForPrivateNetworks, UseSpecifiedNetworks.
+Update only `AAAA` Records.
 
-### Option: `recursion_denied_networks`
+**Note**: _If **ipv4** and **ipv6** not given, both Record Types will updated_
 
-Comma separated list of IP addresses or network addresses to deny recursion. Valid only for UseSpecifiedNetworks recursion option.
+### Option: `my_fritz_fqdn`
 
-### Option: `recursion_allowed_networks`
+Use MyFritz to determine the Public IP Address, otherwise Cloudflare `whoami` Service will used.
 
-Comma separated list of IP addresses or network addresses to allow recursion. Valid only for UseSpecifiedNetworks recursion option.
-
-### Option: `enable_blocking`
-
-Sets the DNS server to block domain names using Blocked Zone and Block List Zone.
-
-### Option: `allow_txt_blocking_report`
-
-Specifies if the DNS Server should respond with TXT records containing a blocked domain report for TXT type requests.
-
-### Option: `block_list_urls`
-
-A comma separated list of block list URLs.
-
-### Option: `forwarders`
-
-Comma separated list of forwarder addresses.
-
-**Note**: _Typically your Routers IP Address_
-
-### Option: `forwarder_protocol`
-
-Forwarder protocol options: Udp, Tcp, Tls, Https, HttpsJson. Default is Udp.
-
-### Option: `local_time`
-
-Enable this option to use local time instead of UTC for logging.
-
-## Configuration folder
-
-The addon will store most of its configuration in the `/data/config` folder. Please ensure this is included in your backup.
+**Note**: _This could only work, if you have registered your Fritz Box by AVM_
 
 ## Support
 

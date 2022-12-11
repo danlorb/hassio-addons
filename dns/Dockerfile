@@ -24,7 +24,6 @@ WORKDIR /tmp
 
 RUN apt-get update \
     && apt-get install -qy --no-install-recommends \
-        apt-utils \
         wget \
         curl \
     && wget -nv https://packages.microsoft.com/config/debian/11/packages-microsoft-prod.deb -O packages-microsoft-prod.deb \
@@ -37,7 +36,6 @@ RUN apt-get update \
     && mkdir -p /opt/dns \
     && tar -zxf DnsServerPortable.tar.gz -C /opt/dns/ \
     && apt-get purge -y --auto-remove \
-        apt-utils \
         wget \
     && apt-get clean \
     && rm -rf \

@@ -26,7 +26,8 @@
                 "HETZNER_AUTH_API_TOKEN": "${input:hetzner_api_token}",
                 "HETZNER_ZONE_NAME": "${input:hetzner_zone_name}",
                 "HETZNER_RECORD_NAME": "${input:hetzner_record_name}",
-                "HETZNER_RECORD_TYPE": "${input:hetzner_record_type}"
+                "HETZNER_RECORD_TYPE": "${input:hetzner_record_type}",
+                "MY_FRITZ_FQDN": "${input:my_fritz_fqdn}"
             }
         }
     ],
@@ -52,6 +53,11 @@
             "type": "promptString",
             "description": "Please type your Record Type (e.g. A or AAAA)",
             "default": "A"
+        },
+        {
+            "id": "my_fritz_fqdn",
+            "type": "promptString",
+            "description": "Please type your FQDN of your Fritzbox"
         }
     ]
 }

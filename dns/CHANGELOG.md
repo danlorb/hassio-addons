@@ -1,6 +1,3 @@
-### Before you can install/update this AddOn, change DNS Setting of your Home Assistant Installation to a DNS Server Installation in your Network, which is reachable in your Network, for example `8.8.8.8` (Google DNS Server). After you have updated the AddOn change DNS Server Setting of your Home Assistant Installation to IP Adresses of this AddOn. This could be found in the Output of your Protocol.
-
-
 ## 1.0.0
 
 - First Release

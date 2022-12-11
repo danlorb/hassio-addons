@@ -24,12 +24,25 @@ if bashio::config.has_value 'api_token'; then
                 domain=$(bashio::jq "${recordAsJson}" ".domain")
                 record=$(bashio::jq "${recordAsJson}" ".name")
                 ttl=$(bashio::jq "${recordAsJson}" ".ttl")
-                type=$(bashio::jq "${recordAsJson}" ".type")
+                ipv4=$(bashio::jq "${recordAsJson}" ".ipv4")
+                ipv6=$(bashio::jq "${recordAsJson}" ".ipv6")
+                my_fritz_fqdn=$(bashio::jq "${recordAsJson}" ".my_fritz_fqdn")
 
                 bashio::log.info "Execute DynDns Update for Domain '${domain}'"
-                bashio::log.info "Update Record '${record}' with TTL ${ttl} and Type ${type}"
+                if [ "${ipv4}" == "" ] && [ "${ipv6}" == "" ]; then
+                    ipv4="true"
+                    ipv6="true"
+                fi
 
-                /usr/bin/bashio /etc/dyndns/dyndns.sh -Z "${domain}" -n "${record}" -t "${ttl}" -T "${type}"
+                if [ "${ipv4}" != "" ]; then
+                    bashio::log.info "Update Record '${record}' with TTL ${ttl} and Type A"
+                    /usr/bin/bashio /etc/dyndns/dyndns.sh -Z "${domain}" -n "${record}" -t "${ttl}" -T "A" -F "${my_fritz_fqdn}"
+                fi
+
+                if [ "${ipv6}" != "" ]; then
+                    bashio::log.info "Update Record '${record}' with TTL ${ttl} and Type AAAA"
+                    /usr/bin/bashio /etc/dyndns/dyndns.sh -Z "${domain}" -n "${record}" -t "${ttl}" -T "AAAA" -F "${my_fritz_fqdn}"
+                fi
             done
 
             sleep "${interval}"

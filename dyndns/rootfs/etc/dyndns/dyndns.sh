@@ -5,10 +5,12 @@
 
 # get OS environment variables
 auth_api_token=${HETZNER_AUTH_API_TOKEN:-''}
+
 zone_name=${HETZNER_ZONE_NAME:-''}
 record_name=${HETZNER_RECORD_NAME:-''}
 record_ttl=${HETZNER_RECORD_TTL:-'60'}
 record_type=${HETZNER_RECORD_TYPE:-'A'}
+my_fritz_fqdn=${MY_FRITZ_FQDN:-''}
 zone_id=
 record_id=
 
@@ -27,6 +29,7 @@ parameters:
 optional parameters:
   -t  - TTL (Default: 60)
   -T  - Record type (Default: A)
+  -F  - MyFritz fully qualified Name
 
 help:
   -h  - Show Help
@@ -45,12 +48,13 @@ EOF
 bashio::log.trace "Set LogLevel"
 bashio::log.level "$(bashio::config 'log_level' 'warning')"
 
-while getopts ":z:Z:r:n:t:T:h" opt; do
+while getopts ":z:Z:r:n:t:T:F:h" opt; do
     case "$opt" in
     Z) zone_name="${OPTARG}" ;;
     n) record_name="${OPTARG}" ;;
     t) record_ttl="${OPTARG}" ;;
     T) record_type="${OPTARG}" ;;
+    F) my_fritz_fqdn="${OPTARG}" ;;
     h) display_help ;;
     \?) bashio::exit.nok "Invalid option: -${OPTARG}. Leaving DynDns Updater" ;;
     :) bashio::exit.nok "Missing option argument for -${OPTARG}. Leaving DynDns Updater" ;;
@@ -100,24 +104,39 @@ bashio::log.trace "Zone_Name: ${zone_name}"
 
 bashio::log.trace "Get current public ip address"
 ipPrefix="IPv4"
-cloudflareResult=
-if [ "${record_type}" = "AAAA" ]; then
-    bashio::log.trace "Using IPv6, because AAAA was set as record type."
-    ipPrefix="IPv6"
-    cloudflareResult=$(dig -6 ch TXT +short +time=1 +tries=1 whoami.cloudflare @2606:4700:4700::1111 || true)
-elif [ "${record_type}" = "A" ]; then
-    bashio::log.trace "Using IPv4, because A was set as record type."
-    cloudflareResult=$(dig -4 ch TXT +short +time=1 +tries=1 whoami.cloudflare @1.1.1.1 || true)
+queryResult=
+
+if [ "${my_fritz_fqdn}" == "" ]; then
+    if [ "${record_type}" = "AAAA" ]; then
+        bashio::log.trace "Using IPv6, because AAAA was set as record type."
+        ipPrefix="IPv6"
+        queryResult=$(dig -6 ch TXT +short +time=1 +tries=1 whoami.cloudflare @2606:4700:4700::1111 || true)
+    elif [ "${record_type}" = "A" ]; then
+        bashio::log.trace "Using IPv4, because A was set as record type."
+        queryResult=$(dig -4 ch TXT +short +time=1 +tries=1 whoami.cloudflare @1.1.1.1 || true)
+    else
+        bashio::log.error "Only record type \"A\" or \"AAAA\" are support for DynDNS."
+        bashio::log.info "Leaving DynDns Updater"
+    fi
 else
-    bashio::log.error "Only record type \"A\" or \"AAAA\" are support for DynDNS."
-    bashio::log.info "Leaving DynDns Updater"
+    if [ "${record_type}" = "AAAA" ]; then
+        bashio::log.trace "Using IPv6, because AAAA was set as record type."
+        ipPrefix="IPv6"
+        queryResult="\"$(dig -4 +short +time=1 +tries=1 "${my_fritz_fqdn}" -t AAAA)\""
+    elif [ "${record_type}" = "A" ]; then
+        bashio::log.trace "Using IPv4, because A was set as record type."
+        queryResult="\"$(dig -4 +short +time=1 +tries=1 "${my_fritz_fqdn}" -t A)\""
+    else
+        bashio::log.error "Only record type \"A\" or \"AAAA\" are support for DynDNS."
+        bashio::log.info "Leaving DynDns Updater"
+    fi
 fi
 
 cur_pub_addr=
-if [ "${cloudflareResult}" != "" ]; then
-    timedOut=$(echo "${cloudflareResult}" | grep -i "connection timed out" || true)
+if [ "${queryResult}" != "" ]; then
+    timedOut=$(echo "${queryResult}" | grep -i "connection timed out" || true)
     if [ "${timedOut}" == "" ]; then
-        cur_pub_addr=$(echo "${cloudflareResult}" | awk -F '"' '{print $2}')
+        cur_pub_addr=$(echo "${queryResult}" | awk -F '"' '{print $2}')
         if [ "${cur_pub_addr}" = "" ]; then
             bashio::log.warning "It seems you don't have a Public ${ipPrefix} address."
             bashio::log.info "Leaving DynDns Updater"

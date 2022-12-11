@@ -6,14 +6,40 @@
             "domain": "domain.de",
             "name": "wwwtest",
             "ttl": 3600,
-            "type": "A"
+            "ipv4": true
         },
         {
             "domain": "domain.de",
             "name": "wwwtest",
             "ttl": 3600,
-            "type": "AAAA"
+            "ipv6": true
         }
     ],
     "log_level": "info"
 }
+
+{
+    "api_token": "RavbqYw6xyjIP5k7ZsVDgWygn71jKdBJ",
+    "records": [
+      {
+        "domain": "x-breitschaft.de",
+        "name": "smarthome",
+        "ttl": 3600,
+        "type": "A"
+      },
+      {
+        "domain": "x-breitschaft.de",
+        "name": "*",
+        "ttl": 3600,
+        "type": "A"
+      },
+      {
+        "domain": "x-breitschaft.de",
+        "name": "@",
+        "ttl": 3600,
+        "type": "A"
+      }
+    ],
+    "interval": "1h",
+    "log_level": "info"
+  }
