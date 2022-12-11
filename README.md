@@ -6,7 +6,7 @@ _Thanks to everyone having starred my repo! To star it click on the image below,
 
 ## About
 
-Home Assistant allows anyone to create add-on repositories to share their add-ons for Home Assistant easily. This repository is one of those repositories, providing extra Home Assistant add-ons for your installation. You can use this AddOns as is.
+Home Assistant allows anyone to create add-on repositories to share their add-ons for Home Assistant easily. This repository is one of those repositories, providing extra Home Assistant add-ons for your installation. You can use this AddOns as is and at your own Risk.
 
 ## Installation
 
@@ -20,9 +20,14 @@ If you want to do add the repository manually, please follow the procedure highl
 
 Greate Dns/Dhcp Server provided by [Technitium](https://technitium.com/dns) boxed in a HA AddOn
 
-![aarch64][aarch64-badge]
 ![amd64][amd64-badge]
-![armv7][armv7-badge]
+
+### DynDns Updater for Hetzner DNS Server
+
+DynDns Updater to update your public IP in [Hetzner DNS Servers](https://dns.hetzner.com/) boxed in a HA AddOn
+
+![amd64][amd64-badge]
+
 
 
 
