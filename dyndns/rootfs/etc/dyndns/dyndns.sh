@@ -45,7 +45,7 @@ EOF
     bashio::exit.nok "$message"
 }
 
-bashio::log.trace "Set LogLevel"
+bashio::log.debug "Set LogLevel"
 bashio::log.level "$(bashio::config 'log_level' 'warning')"
 
 while getopts ":z:Z:r:n:t:T:F:h" opt; do
@@ -62,13 +62,13 @@ while getopts ":z:Z:r:n:t:T:F:h" opt; do
     esac
 done
 
-bashio::log.trace "Check if api token is set"
+bashio::log.debug "Check if api token is set"
 if [[ "${auth_api_token}" = "" ]]; then
     bashio::log.fatal "No API Token specified."
     bashio::exit.nok "Leaving DynDns Updater"
 fi
 
-bashio::log.trace "Get all zones"
+bashio::log.debug "Get all zones"
 zone_info=$(curl -s -k --location "https://dns.hetzner.com/api/v1/zones" --header "${headerAuth}")
 if bashio::jq.exists "${zone_info}" ".message"; then
     message=$(bashio::jq "${zone_info}" ".message")
@@ -82,52 +82,52 @@ if bashio::jq.exists "${zone_info}" ".message"; then
     fi
 fi
 
-bashio::log.trace "Validate Zone Name"
+bashio::log.debug "Validate Zone Name"
 if [ "${zone_name}" == "" ]; then
     bashio::log.fatal "Mission option for zone name: -Z <Zone Name>"
     bashio::log.fatal "Use -h to display help."
     bashio::exit.nok "Leaving DynDns Updater"
 fi
 
-bashio::log.trace "Validate Record Name"
+bashio::log.debug "Validate Record Name"
 if [ "${record_name}" == "" ]; then
     bashio::log.fatal "Mission option for record name: -n <Record Name>"
     bashio::log.fatal "Use -h to display help."
     bashio::exit.nok "Leaving DynDns Updater"
 fi
 
-bashio::log.trace "Get zone_id if zone_name is given and in zones"
+bashio::log.debug "Get zone_id if zone_name is given and in zones"
 zone_id=$(bashio::jq "${zone_info}" '.zones[] | select(.name=="'"${zone_name}"'") | .id')
 
-bashio::log.trace "Zone_ID: ${zone_id}"
-bashio::log.trace "Zone_Name: ${zone_name}"
+bashio::log.debug "Zone_ID: ${zone_id}"
+bashio::log.debug "Zone_Name: ${zone_name}"
 
-bashio::log.trace "Get current public ip address"
+bashio::log.debug "Get current public ip address"
 ipPrefix="IPv4"
 queryResult=
 
 if [ "${my_fritz_fqdn}" == "" ]; then
-    bashio::log.info "Use whoami Service from Cloudflare to determine public IP Address"
+    bashio::log.debug "Use whoami Service from Cloudflare to determine public IP Address"
     if [ "${record_type}" = "AAAA" ]; then
-        bashio::log.trace "Using IPv6, because AAAA was set as record type."
+        bashio::log.debug "Using IPv6, because AAAA was set as record type."
         ipPrefix="IPv6"
         queryResult=$(dig -6 ch TXT +short +time=1 +tries=1 whoami.cloudflare @2606:4700:4700::1111 || true)
     elif [ "${record_type}" = "A" ]; then
-        bashio::log.trace "Using IPv4, because A was set as record type."
+        bashio::log.debug "Using IPv4, because A was set as record type."
         queryResult=$(dig -4 ch TXT +short +time=1 +tries=1 whoami.cloudflare @1.1.1.1 || true)
     else
         bashio::log.error "Only record type \"A\" or \"AAAA\" are support for DynDNS."
         bashio::log.info "Leaving DynDns Updater"
     fi
 else
-    bashio::log.info "Use Fritz.Box FQDN to determine public IP Address"
+    bashio::log.debug "Use Fritz.Box FQDN to determine public IP Address"
     if [ "${record_type}" = "AAAA" ]; then
-        bashio::log.trace "Using IPv6, because AAAA was set as record type."
+        bashio::log.debug "Using IPv6, because AAAA was set as record type."
         ipPrefix="IPv6"
-        queryResult="\"$(dig -4 +short +time=1 +tries=1 "${my_fritz_fqdn}" @1.1.1.1 -t AAAA)\""
+        queryResult="\"$(dig +short +time=1 +tries=1 @ns1.myfritz.net -t AAAA "${my_fritz_fqdn}")\""
     elif [ "${record_type}" = "A" ]; then
-        bashio::log.trace "Using IPv4, because A was set as record type."
-        queryResult="\"$(dig -4 +short +time=1 +tries=1 "${my_fritz_fqdn}" @1.1.1.1 -t A)\""
+        bashio::log.debug "Using IPv4, because A was set as record type."
+        queryResult="\"$(dig +short +time=1 +tries=1 @ns1.myfritz.net -t A "${my_fritz_fqdn}")\""
     else
         bashio::log.error "Only record type \"A\" or \"AAAA\" are support for DynDNS."
         bashio::log.info "Leaving DynDns Updater"
@@ -136,34 +136,40 @@ fi
 
 cur_pub_addr=
 if [ "${queryResult}" != "" ]; then
-    bashio::log.trace "QueryResult: ${queryResult}"
+    bashio::log.debug "QueryResult: ${queryResult}"
     timedOut=$(echo "${queryResult}" | grep -i "connection timed out" || true)
     if [ "${timedOut}" == "" ]; then
-        cur_pub_addr=$(echo "${queryResult}" | awk -F '"' '{print $2}')
-        if [ "${cur_pub_addr}" = "" ]; then
-            bashio::log.warning "It seems you don't have a Public ${ipPrefix} address."
-            bashio::log.info "Leaving DynDns Updater"
+        rootServers=$(echo "${queryResult}" | grep -i "root-servers.net" || true)
+        if [ "${rootServers}" == "" ]; then
+            cur_pub_addr=$(echo "${queryResult}" | awk -F '"' '{print $2}')
+            if [ "${cur_pub_addr}" = "" ]; then
+                bashio::log.warning "It seems you don't have a Public ${ipPrefix} address. (Reason: DNS Query could not parsed)"
+                cur_pub_addr=""
+            else
+                bashio::log.info "Your public ${ipPrefix} address: ${cur_pub_addr}"
+            fi
         else
-            bashio::log.info "Your public ${ipPrefix} address: ${cur_pub_addr}"
+            bashio::log.warning "It seems you don't have a Public ${ipPrefix} address. (Reason: Only Root Servers returned)"
+            cur_pub_addr=""
         fi
     else
-        bashio::log.warning "It seems you don't have a Public ${ipPrefix} address."
-        bashio::log.info "Leaving DynDns Updater"
+        bashio::log.warning "It seems you don't have a Public ${ipPrefix} address. (Reason: DNS Query timed out)"
+        cur_pub_addr=""
     fi
 else
-    bashio::log.warning "It seems you don't have a Public ${ipPrefix} address."
-    bashio::log.info "Leaving DynDns Updater"
+    bashio::log.warning "It seems you don't have a Public ${ipPrefix} address. (Reason: No DNS Query result)"
+    cur_pub_addr=""
 fi
 
 if [ "${cur_pub_addr}" != "" ]; then
 
-    bashio::log.trace "Get record id if not given as parameter"
+    bashio::log.debug "Get record id if not given as parameter"
     record_zone=$(curl -s -k --location --request GET "https://dns.hetzner.com/api/v1/records?zone_id=${zone_id}" --header "${headerAuth}")
     record_id=$(bashio::jq "${record_zone}" '.records[] | select(.type == "'"${record_type}"'") | select(.name == "'"${record_name}"'") | .id')
-    bashio::log.trace "Record_ID: ${record_id}"
+    bashio::log.debug "Record_ID: ${record_id}"
 
     if [[ "${record_id}" = "" ]]; then
-        bashio::log.trace "Create a new record"
+        bashio::log.debug "Create a new record"
         bashio::log.info "DNS record \"${record_name}\" does not exists - will be created."
         curl -s -k -o /dev/null -X "POST" "https://dns.hetzner.com/api/v1/records" --header "${headerContentType}" --header "${headerAuth}" --data "$(
             cat <<EOF
@@ -177,12 +183,12 @@ if [ "${cur_pub_addr}" != "" ]; then
 EOF
         )"
     else
-        bashio::log.trace "Check if update is needed"
+        bashio::log.debug "Check if update is needed"
         cur_record=$(curl -k -s "https://dns.hetzner.com/api/v1/records/${record_id}" --header "${headerAuth}")
         cur_dyn_addr=$(bashio::jq "${cur_record}" ".record.value")
 
         bashio::log.info "Currently stored IP address: ${cur_dyn_addr}"
-        bashio::log.trace "update existing record"
+        bashio::log.debug "update existing record"
         if [ "$cur_pub_addr" == "$cur_dyn_addr" ]; then
             bashio::log.info "DNS record \"${record_name}\" is up to date - nothing to to."
         else
@@ -201,6 +207,9 @@ EOF
             )"
         fi
     fi
+else
+    bashio::log.info "Public IP Address could not determined."
+    bashio::log.info "Leaving DynDns Updater"
 fi
 
 if [ $? != 0 ]; then
