@@ -1,0 +1,8 @@
+{
+    "domain": "ns.my-server.de",
+    "admin_password": "MyPassword",
+    "forwarders": "192.168.188.188",
+    "local_time": true,
+    "log_level": "info",
+    "forwarder_protocol": "Udp"
+}

@@ -87,8 +87,8 @@ LABEL \
     org.opencontainers.image.authors="rolbre (https://github.com/rolbre)" \
     org.opencontainers.image.licenses="MIT" \
     org.opencontainers.image.url="https://github.com/rolbre" \
-    org.opencontainers.image.source="https://git.x-breitschaft.de/smarthome/hassio-addons/src/branch/main/technitium" \
-    org.opencontainers.image.documentation="https://git.x-breitschaft.de/smarthome/hassio-addons/src/branch/main/technitium/README.md" \
+    org.opencontainers.image.source="https://github.com/rolbre/hassio-addons/tree/main/dns" \
+    org.opencontainers.image.documentation="https://github.com/rolbre/hassio-addons/blob/main/dns/README.md" \
     org.opencontainers.image.created=${BUILD_DATE} \
     org.opencontainers.image.revision=${BUILD_REF} \
     org.opencontainers.image.version=${BUILD_VERSION}

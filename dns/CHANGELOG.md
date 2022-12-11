@@ -55,3 +55,8 @@
 ## 1.0.13
 
 - Add Warning for Auto Update Function
+
+## 1.0.14
+
+- Update Doku
+- Add Dev Container for Development

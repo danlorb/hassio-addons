@@ -6,11 +6,7 @@
 # ==============================================================================
 
 # Set Log Level
-if bashio::config.has_value 'log_level'; then
-    bashio::log.info 'Set Log Level'
-    log_level=$(bashio::config 'log_level')
-    bashio::log.level "${log_level}"
-fi
+bashio::log.level "$(bashio::config 'log_level' 'warning')"
 
 # Set some Environment Variables if available
 bashio::log.info "Load Dns/Dhcp Server Configuration..."
@@ -28,8 +24,8 @@ bashio::config.has_value 'forwarders' && export DNS_SERVER_FORWARDERS=$(bashio::
 bashio::config.has_value 'forwarder_protocol' && export DNS_SERVER_FORWARDER_PROTOCOL=$(bashio::config 'forwarder_protocol') && bashio::log.info 'Forwareder Protocol set'
 bashio::config.has_value 'local_time' && export DNS_SERVER_LOG_USING_LOCAL_TIME=$(bashio::config 'local_time') && bashio::log.info 'Local Time set'
 
-currentIPv4=$(hostname -i)
-currentIPv6=$(hostname -I | grep -oP '[a-f0-9:]+:+[a-f0-9]+')
+currentIPv4=$(hostname -i || true)
+currentIPv6=$(hostname -I | grep -oP '[a-f0-9:]+:+[a-f0-9]+' || true)
 
 bashio::log.info "Starting Dns/Dhcp Server..."
 bashio::log.info "Use IP '${currentIPv4}' for Home Assistant IPv4 DNS Server Konfiguration"

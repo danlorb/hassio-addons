@@ -1,11 +1,11 @@
 ---
 name: Dns/Dhcp Server
-version: 1.0.13
+version: 1.0.14
 stage: stable
 slug: dns
 description: >-
   Self host a Dns/Dhcp server for privacy & security
-url: https://git.x-breitschaft.de/smarthome/hassio-addons
+url: https://github.com/rolbre/hassio-addons/tree/main/dns
 arch:
   - amd64
 codenotary: breitschaftroland@gmail.com
