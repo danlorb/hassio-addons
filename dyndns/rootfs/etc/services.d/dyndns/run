@@ -18,6 +18,7 @@ if bashio::config.has_value 'api_token'; then
 
         bashio::log.trace "Read Interval"
         interval=$(bashio::config 'interval' '1h')
+        my_fritz_fqdn=$(bashio::config 'my_fritz_fqdn')
 
         while true; do
             for recordAsJson in $(bashio::config 'records'); do
@@ -26,7 +27,6 @@ if bashio::config.has_value 'api_token'; then
                 ttl=$(bashio::jq "${recordAsJson}" ".ttl")
                 ipv4=$(bashio::jq "${recordAsJson}" ".ipv4")
                 ipv6=$(bashio::jq "${recordAsJson}" ".ipv6")
-                my_fritz_fqdn=$(bashio::jq "${recordAsJson}" ".my_fritz_fqdn")
 
                 bashio::log.info "Execute DynDns Update for Domain '${domain}'"
                 if [ "${ipv4}" == "" ] && [ "${ipv6}" == "" ]; then
