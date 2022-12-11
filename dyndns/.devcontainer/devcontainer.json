@@ -1,0 +1,44 @@
+// For format details, see https://aka.ms/devcontainer.json. For config options, see the
+// README at: https://github.com/devcontainers/templates/tree/main/src/debian
+{
+    "name": "dyndns",
+    "mounts": [
+        {
+            "source": "${localWorkspaceFolder}/.devcontainer/mounts/data",
+            "target": "/data",
+            "type": "bind"
+        },
+        {
+            "source": "${localWorkspaceFolder}/rootfs/etc/dyndns/dyndns.sh",
+            "target": "/etc/dyndns/dyndns.sh",
+            "type": "bind"
+        }
+    ],
+    "build": {
+        "dockerfile": "../Dockerfile",
+        "args": {
+            "BUILD_FROM": "ghcr.io/home-assistant/amd64-base-debian:bullseye"
+        }
+    },
+    "extensions": [
+        "rogalmic.bash-debug",
+        "lizebang.bash-extension-pack",
+        "mads-hartmann.bash-ide-vscode",
+        "bat-snippets.bat-snippets",
+        "jetmartin.bats",
+        "jeff-hykin.better-dockerfile-syntax",
+        "rpinski.shebang-snippets",
+        "foxundermoon.shell-format",
+        "timonwong.shellcheck",
+        "Remisa.shellman",
+        "redhat.vscode-xml",
+        "mikeburgh.xml-format",
+        "redhat.vscode-yaml",
+        "vscode-icons-team.vscode-icons",
+        "IBM.output-colorizer",
+        "eriklynd.json-tools",
+        "exiasr.hadolint"
+    ],
+    "postCreateCommand": "apt-get update && apt-get install -qy --no-install-recommends procps && mkdir -p /tmp/.bashio && ln -s /data/options.json /tmp/.bashio/addons.self.options.config.cache",
+    "remoteUser": "root"
+}

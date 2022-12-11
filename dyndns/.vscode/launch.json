@@ -1,0 +1,57 @@
+{
+    // Verwendet IntelliSense zum Ermitteln möglicher Attribute.
+    // Zeigen Sie auf vorhandene Attribute, um die zugehörigen Beschreibungen anzuzeigen.
+    // Weitere Informationen finden Sie unter https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "bashdb",
+            "request": "launch",
+            "name": "Default",
+            "program": "/usr/bin/bashio",
+            "args": [
+                "${file}"
+            ]
+        },
+        {
+            "type": "bashdb",
+            "request": "launch",
+            "name": "Launch DynDns.sh",
+            "cwd": "${workspaceFolder}/rootfs/etc/dyndns",
+            "program": "/usr/bin/bashio",
+            "args": [
+                "dyndns.sh"
+            ],
+            "env": {
+                "HETZNER_AUTH_API_TOKEN": "${input:hetzner_api_token}",
+                "HETZNER_ZONE_NAME": "${input:hetzner_zone_name}",
+                "HETZNER_RECORD_NAME": "${input:hetzner_record_name}",
+                "HETZNER_RECORD_TYPE": "${input:hetzner_record_type}"
+            }
+        }
+    ],
+    "inputs": [
+        {
+            "id": "hetzner_api_token",
+            "type": "promptString",
+            "password": true,
+            "description": "Please type Hetzner DNS API Token"
+        },
+        {
+            "id": "hetzner_zone_name",
+            "type": "promptString",
+            "description": "Please type your Domain Name (e.g. my-domain.com)"
+        },
+        {
+            "id": "hetzner_record_name",
+            "type": "promptString",
+            "description": "Please type your Record Name (e.g. www)"
+        },
+        {
+            "id": "hetzner_record_type",
+            "type": "promptString",
+            "description": "Please type your Record Type (e.g. A or AAAA)",
+            "default": "A"
+        }
+    ]
+}

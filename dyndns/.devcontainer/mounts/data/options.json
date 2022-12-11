@@ -1,0 +1,22 @@
+{
+    "api_token": "",
+    "interval": "10s",
+    "domains": [
+        {
+            "domain": "domain.de",
+            "records": [
+                {
+                    "record": "wwwtest",
+                    "ttl": 3600,
+                    "type": "A"
+                },
+                {
+                    "record": "wwwtest",
+                    "ttl": 3600,
+                    "type": "AAAA"
+                }
+            ]
+        }
+    ],
+    "log_level": "info"
+}

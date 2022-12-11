@@ -17,6 +17,7 @@ COPY rootfs /
 # Corrects permissions for s6
 RUN if [ -d /etc/cont-init.d ]; then chmod -R 755 /etc/cont-init.d; fi && \
     if [ -d /etc/services.d ]; then chmod -R 755 /etc/services.d; fi && \
+    if [ -d /etc/dyndns ]; then chmod -R 755 /etc/dyndns; fi && \
     if [ -f /entrypoint.sh ]; then chmod 755 /entrypoint.sh; fi
 
 # Set Workdir
@@ -25,7 +26,7 @@ WORKDIR /tmp
 RUN apt-get update \
     && apt-get install -qy --no-install-recommends \
         apt-utils \
-        cron \
+        dnsutils \
     && apt-get purge -y --auto-remove \
         apt-utils \
     && apt-get clean \
@@ -58,8 +59,8 @@ LABEL \
     org.opencontainers.image.authors="rolbre (https://github.com/rolbre)" \
     org.opencontainers.image.licenses="MIT" \
     org.opencontainers.image.url="https://github.com/rolbre" \
-    org.opencontainers.image.source="https://git.x-breitschaft.de/smarthome/hassio-addons/src/branch/main/technitium" \
-    org.opencontainers.image.documentation="https://git.x-breitschaft.de/smarthome/hassio-addons/src/branch/main/technitium/README.md" \
+    org.opencontainers.image.source="https://github.com/rolbre/hassio-addons/tree/main/dyndns" \
+    org.opencontainers.image.documentation="https://github.com/rolbre/hassio-addons/blob/main/dyndns/README.md" \
     org.opencontainers.image.created=${BUILD_DATE} \
     org.opencontainers.image.revision=${BUILD_REF} \
     org.opencontainers.image.version=${BUILD_VERSION}
