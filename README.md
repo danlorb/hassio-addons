@@ -30,7 +30,7 @@ DynDns Updater to update your public IP in [Hetzner DNS Servers](https://dns.het
 
 ## Known Issues
 
-- Installation of `Dns` AddOn will break automatic Updates for all AddOns on your Home Assistant Installation. If you want Update other AddOns you have to configure the DNS Server for Home Assistant to a public reachable DNS Server (e.g. Google 8.8.8.8 or Cloudflare 1.1.1.1). After you have installed/updated AddOns, change DNS Server Setting of your Home Assistant Installation to IP Adresses of the Dns AddOn. This could be found in the Output of the `Dns AddOn` Protocol.
+- Installation of `Dns` AddOn will break automatic Updates for all AddOns on your Home Assistant Installation. While you install/update your AddOns you have to configure a public reachable DNS Server for Home Assistant (e.g. Google 8.8.8.8 or Cloudflare 1.1.1.1). After install/update, change DNS Server Setting of your Home Assistant Installation back to IP Addresses of the Dns AddOn. This could be found in the Output of the `Dns AddOn` Protocol.
 
 
 [aarch64-badge]: https://img.shields.io/badge/aarch64--green.svg?logo=arm

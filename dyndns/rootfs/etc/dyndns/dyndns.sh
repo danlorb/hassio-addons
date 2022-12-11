@@ -107,6 +107,7 @@ ipPrefix="IPv4"
 queryResult=
 
 if [ "${my_fritz_fqdn}" == "" ]; then
+    bashio::log.info "Use whoami Service from Cloudflare to determine public IP Address"
     if [ "${record_type}" = "AAAA" ]; then
         bashio::log.trace "Using IPv6, because AAAA was set as record type."
         ipPrefix="IPv6"
@@ -119,6 +120,7 @@ if [ "${my_fritz_fqdn}" == "" ]; then
         bashio::log.info "Leaving DynDns Updater"
     fi
 else
+    bashio::log.info "Use Fritz.Box FQDN to determine public IP Address"
     if [ "${record_type}" = "AAAA" ]; then
         bashio::log.trace "Using IPv6, because AAAA was set as record type."
         ipPrefix="IPv6"
@@ -134,6 +136,7 @@ fi
 
 cur_pub_addr=
 if [ "${queryResult}" != "" ]; then
+    bashio::log.trace "QueryResult: ${queryResult}"
     timedOut=$(echo "${queryResult}" | grep -i "connection timed out" || true)
     if [ "${timedOut}" == "" ]; then
         cur_pub_addr=$(echo "${queryResult}" | awk -F '"' '{print $2}')
