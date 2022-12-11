@@ -1,6 +1,6 @@
 ---
 name: DynDns
-version: 0.1.4
+version: 0.1.5
 stage: experimental
 slug: dyndns
 description: >-
