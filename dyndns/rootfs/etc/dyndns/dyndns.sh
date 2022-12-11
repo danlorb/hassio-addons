@@ -122,10 +122,10 @@ else
     if [ "${record_type}" = "AAAA" ]; then
         bashio::log.trace "Using IPv6, because AAAA was set as record type."
         ipPrefix="IPv6"
-        queryResult="\"$(dig -4 +short +time=1 +tries=1 "${my_fritz_fqdn}" -t AAAA)\""
+        queryResult="\"$(dig -4 +short +time=1 +tries=1 "${my_fritz_fqdn}" @1.1.1.1 -t AAAA)\""
     elif [ "${record_type}" = "A" ]; then
         bashio::log.trace "Using IPv4, because A was set as record type."
-        queryResult="\"$(dig -4 +short +time=1 +tries=1 "${my_fritz_fqdn}" -t A)\""
+        queryResult="\"$(dig -4 +short +time=1 +tries=1 "${my_fritz_fqdn}" @1.1.1.1 -t A)\""
     else
         bashio::log.error "Only record type \"A\" or \"AAAA\" are support for DynDNS."
         bashio::log.info "Leaving DynDns Updater"
@@ -141,7 +141,7 @@ if [ "${queryResult}" != "" ]; then
             bashio::log.warning "It seems you don't have a Public ${ipPrefix} address."
             bashio::log.info "Leaving DynDns Updater"
         else
-            bashio::log.info "Current public ${ipPrefix} address: ${cur_pub_addr}"
+            bashio::log.info "Your public ${ipPrefix} address: ${cur_pub_addr}"
         fi
     else
         bashio::log.warning "It seems you don't have a Public ${ipPrefix} address."
@@ -162,7 +162,7 @@ if [ "${cur_pub_addr}" != "" ]; then
     if [[ "${record_id}" = "" ]]; then
         bashio::log.trace "Create a new record"
         bashio::log.info "DNS record \"${record_name}\" does not exists - will be created."
-        curl -s -k -X "POST" "https://dns.hetzner.com/api/v1/records" --header "${headerContentType}" --header "${headerAuth}" --data "$(
+        curl -s -k -o /dev/null -X "POST" "https://dns.hetzner.com/api/v1/records" --header "${headerContentType}" --header "${headerAuth}" --data "$(
             cat <<EOF
 {
     "value": "${cur_pub_addr}",
@@ -178,14 +178,14 @@ EOF
         cur_record=$(curl -k -s "https://dns.hetzner.com/api/v1/records/${record_id}" --header "${headerAuth}")
         cur_dyn_addr=$(bashio::jq "${cur_record}" ".record.value")
 
-        bashio::log.info "Currently set IP address: ${cur_dyn_addr}"
+        bashio::log.info "Currently stored IP address: ${cur_dyn_addr}"
         bashio::log.trace "update existing record"
         if [ "$cur_pub_addr" == "$cur_dyn_addr" ]; then
             bashio::log.info "DNS record \"${record_name}\" is up to date - nothing to to."
         else
             bashio::log.info "DNS record \"${record_name}\" is no longer valid - updating record"
 
-            curl -k -s -X "PUT" "https://dns.hetzner.com/api/v1/records/${record_id}" --header "${headerContentType}" --header "${headerAuth}" --data "$(
+            curl -k -s -o /dev/null -X "PUT" "https://dns.hetzner.com/api/v1/records/${record_id}" --header "${headerContentType}" --header "${headerAuth}" --data "$(
                 cat <<EOF
 {
     "value": "${cur_pub_addr}",

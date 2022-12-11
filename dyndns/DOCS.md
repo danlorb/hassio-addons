@@ -86,6 +86,8 @@ DNS Record Name which should updated. If Record Name not exists it will created
 
 TTL for the Record Name. Default is 3600
 
+**Note**: _TTL should be identical with `interval`_
+
 ### Option: `ipv4`
 
 Update only `A` Records

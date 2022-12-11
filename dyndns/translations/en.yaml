@@ -23,6 +23,12 @@ configuration:
   ttl:
     name: TTL
     description: TTL for the DNS Record
-  type:
-    name: DNS Record Type
-    description: DNS Record Type could be A or AAAA
+  ipv4:
+    name: IPv4
+    description: Only update A Record Types
+  ipv6:
+    name: IPv6
+    description: Only update AAAA Record Types
+  my_fritz_fqdn:
+    name: MyFritz FQDN
+    description: FQDN of your Fritz.box registerd by AVM
