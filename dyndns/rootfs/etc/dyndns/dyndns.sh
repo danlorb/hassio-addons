@@ -120,7 +120,6 @@ if [ "${my_fritz_fqdn}" == "" ]; then
         queryResult=$(dig -4 ch TXT +short +time=1 +tries=1 whoami.cloudflare @1.1.1.1 || true)
     else
         bashio::log.error "Only record type \"A\" or \"AAAA\" are support for DynDNS."
-        bashio::log.info "Leaving DynDns Updater"
     fi
 else
     bashio::log.debug "Use Fritz.Box FQDN to determine public IP Address"
@@ -133,7 +132,6 @@ else
         queryResult="\"$(dig +short +time=1 +tries=1 @ns1.myfritz.net -t A "${my_fritz_fqdn}")\""
     else
         bashio::log.error "Only record type \"A\" or \"AAAA\" are support for DynDNS."
-        bashio::log.info "Leaving DynDns Updater"
     fi
 fi
 
@@ -173,7 +171,7 @@ if [ "${cur_pub_addr}" != "" ]; then
 
     if [[ "${record_id}" = "" ]]; then
         bashio::log.debug "Create a new record"
-        bashio::log.info "DNS record \"${record_name}\" does not exists - will be created."
+        bashio::log.info "DNS record \"${record_name}\" does not exists. Create it now..."
         curl -s -k -o /dev/null -X "POST" "https://dns.hetzner.com/api/v1/records" --header "${headerContentType}" --header "${headerAuth}" --data "$(
             cat <<EOF
 {
@@ -193,10 +191,9 @@ EOF
         bashio::log.info "Currently stored IP address: ${cur_dyn_addr}"
         bashio::log.debug "update existing record"
         if [ "$cur_pub_addr" == "$cur_dyn_addr" ]; then
-            bashio::log.info "DNS record \"${record_name}\" is up to date - nothing to to."
+            bashio::log.info "DNS record \"${record_name}\" is up to date. Nothing to do."
         else
-            bashio::log.info "DNS record \"${record_name}\" is no longer valid - updating record"
-
+            bashio::log.info "DNS record \"${record_name}\" is no longer valid. Updating record..."
             curl -k -s -o /dev/null -X "PUT" "https://dns.hetzner.com/api/v1/records/${record_id}" --header "${headerContentType}" --header "${headerAuth}" --data "$(
                 cat <<EOF
 {
@@ -212,12 +209,12 @@ EOF
     fi
 else
     bashio::log.info "Public IP Address could not determined."
-    bashio::log.info "Leaving DynDns Updater"
 fi
 
 if [ $? != 0 ]; then
     bashio::log.fatal "Unable to update record: \"${record_name}\""
     bashio::exit.nok "Leaving DynDns Updater"
 else
-    bashio::exit.ok "Leaving DynDns Updater"
+    bashio::log.info "Leaving DynDns Updater"
+    bashio::exit.ok
 fi
