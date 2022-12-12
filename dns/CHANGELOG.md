@@ -62,3 +62,7 @@
 
 - Enable Port 80 and 443
 - Add `logs` and `stats` to Backup Excludes
+
+## 1.1.1
+
+- Remove some not really needed Ports

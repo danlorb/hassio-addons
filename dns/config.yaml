@@ -1,6 +1,6 @@
 ---
 name: Dns/Dhcp Server
-version: 1.1.0
+version: 1.1.1
 stage: stable
 slug: dns
 description: >-
@@ -27,18 +27,17 @@ ports:
   53/udp: 53
   67/udp: 67
   68/udp: 68
-  853/tcp: 853
-  5335/tcp: 5335
-  5335/udp: 5335
   5380/tcp: 5380
   8053/tcp: 8053
-  80/tcp: 80
-  443/tcp: 443
+  853/tcp: null
+  80/tcp: null
+  443/tcp: null
 options:
   domain: homeassistant.local
   admin_password: null
   forwarders: null
   local_time: true
+  dns_over_http: true
   log_level: info
 schema:
   domain: str

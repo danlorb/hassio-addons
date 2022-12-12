@@ -50,7 +50,5 @@ network:
   80/tcp: DNS-over-HTTPS service certbot certificate renewal
   443/tcp: DNS-over-HTTPS service
   853/tcp: DNS-over-TLS service
-  5335/tcp: DNS server port Mask
-  5335/udp: DNS server port Mask
   5380/tcp: DNS web console
-  8053/tcp: DNS-over-HTTPS using reverse proxy
+  8053/tcp: DNS-over-HTTP using reverse proxy
