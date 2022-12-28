@@ -28,6 +28,12 @@ DynDns Updater to update your public IP in [Hetzner DNS Servers](https://dns.het
 
 ![amd64][amd64-badge]
 
+### Guacamole
+
+Guacamole Remote Management [Apache Guacamole](https://guacamole.apache.org/) boxed in a HA AddOn
+
+![amd64][amd64-badge]
+
 ## Known Issues
 
 - Installation of `Dns` AddOn will break automatic Updates for all AddOns on your Home Assistant Installation. While you install/update your AddOns you have to configure a public reachable DNS Server for Home Assistant (e.g. Google 8.8.8.8 or Cloudflare 1.1.1.1). After install/update, change DNS Server Setting of your Home Assistant Installation back to IP Addresses of the Dns AddOn. This could be found in the Output of the `Dns AddOn` Protocol.
