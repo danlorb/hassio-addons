@@ -7,6 +7,11 @@
             "source": "${localWorkspaceFolder}/.devcontainer/mounts/data",
             "target": "/data",
             "type": "bind"
+        },
+        {
+            "source": "${localWorkspaceFolder}/.devcontainer/mounts/config",
+            "target": "/config",
+            "type": "bind"
         }
     ],
     "build": {
@@ -37,6 +42,8 @@
         "eriklynd.json-tools",
         "exiasr.hadolint"
     ],
-    "postCreateCommand": "apt-get update && apt-get install -qy --no-install-recommends procps && mkdir -p /tmp/.bashio && ln -s /data/options.json /tmp/.bashio/addons.self.options.config.cache",
+    "postCreateCommand": "${containerWorkspaceFolder}/.devcontainer/post-create.sh",
+    "postStartCommand": "${containerWorkspaceFolder}/.devcontainer/post-start.sh",
+    "postAttachCommand": "${containerWorkspaceFolder}/.devcontainer/post-attach.sh",
     "remoteUser": "root"
 }
