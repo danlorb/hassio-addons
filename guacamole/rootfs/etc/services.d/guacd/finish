@@ -11,5 +11,5 @@ if [[ "${1}" -ne 0 ]] && [[ "${1}" -ne 256 ]]; then
   /run/s6/basedir/bin/halt
 fi
 
-bashio::log.info "Starting the Guacamole Da..."
+bashio::log.info "Stopping Guacamole Daemon..."
 exec /app/guacamole/guacd stop

@@ -16,7 +16,7 @@ if [ ! -f "${configdir}"/guacamole.properties ]; then
     cp -rn /app/guacamole/* "${configdir}"
 fi
 
-app_password=$(bashio::config 'database_password', 'null')
+app_password=$(bashio::config 'database_password' 'null')
 if bashio::config.true 'use_database'; then
     bashio::log.info 'Configure Database'
 
