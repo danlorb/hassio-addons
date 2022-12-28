@@ -1,0 +1,10 @@
+#!/command/with-contenv bashio
+# ==============================================================================
+# Home Assistant Community Add-on: Guacamole
+# Runs the Guacamole Daemon interface
+# ==============================================================================
+
+bashio::log.level "$(bashio::config 'log_level' 'warning')"
+
+bashio::log.info "Starting the Guacamole Daemon..."
+exec /app/guacamole/guacd start
