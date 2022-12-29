@@ -20,15 +20,19 @@ app_password=$(bashio::config 'database_password' 'null')
 if bashio::config.true 'use_database'; then
     bashio::log.info 'Configure Database'
 
-    sed -i "s|# mysql-hostname: localhost|mysql-hostname: localhost|g" "${configdir}"/guacamole.properties
-    sed -i "s|# mysql-database: guacamole|mysql-database: guacamole|g" "${configdir}"/guacamole.properties
-    sed -i "s|# mysql-username: guacamole|mysql-username: guacamole|g" "${configdir}"/guacamole.properties
-    sed -i "s|# mysql-password: null|mysql-password: ${app_password}|g" "${configdir}"/guacamole.properties
+    content=$(cat "${configdir}"/guacamole.properties)
+    content="${content//# mysql-hostname: localhost/mysql-hostname: localhost}"
+    content="${content//# mysql-database: guacamole/mysql-database: guacamole}"
+    content="${content//# mysql-username: guacamole/mysql-username: guacamole}"
+    content="${content//# mysql-password: null/mysql-password: ${app_password}}"
+    echo "$content" > "${configdir}"/guacamole.properties
 else
-    sed -i "s|mysql-hostname: localhost|# mysql-hostname: localhost|g" "${configdir}"/guacamole.properties
-    sed -i "s|mysql-database: guacamole|# mysql-database: guacamole|g" "${configdir}"/guacamole.properties
-    sed -i "s|mysql-username: guacamole|# mysql-username: guacamole|g" "${configdir}"/guacamole.properties
-    sed -i "s|mysql-password: ${app_password}|# mysql-password: null|g" "${configdir}"/guacamole.properties
+    content=$(cat "${configdir}"/guacamole.properties)
+    content="${content//mysql-hostname: localhost/# mysql-hostname: localhost}"
+    content="${content//mysql-database: guacamole/# mysql-database: guacamole}"
+    content="${content//mysql-username: guacamole/# mysql-username: guacamole}"
+    content="${content//mysql-password: ${app_password}/# mysql-password: null}"
+    echo "$content" > "${configdir}"/guacamole.properties
 fi
 
 bashio::log.info 'Copy Log config to tomcat'

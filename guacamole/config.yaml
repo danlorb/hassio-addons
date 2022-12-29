@@ -1,6 +1,6 @@
 ---
 name: guacamole
-version: 0.1.3
+version: 0.1.4
 stage: experimental
 slug: guacamole
 description: >-
@@ -18,6 +18,8 @@ homeassistant: 2022.11.0
 panel_admin: true
 backup: hot
 video: true
+services:
+  - mysql:want
 map:
   - config:rw
 ports:
