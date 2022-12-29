@@ -110,7 +110,10 @@ RUN mkdir -p ${GUACAMOLE_HOME}/extensions \
     && cp -f /tmp/guacamole-${GUAC_VER}.war ${CATALINA_HOME}/webapps/ROOT.war \
     && dpkg -i /tmp/mysql-connector-j_8.0.31-1debian11_all.deb \
     && cp /usr/share/java/mysql-connector-j-8.0.31.jar ${GUACAMOLE_HOME}/lib \
+    && cp /usr/share/java/mysql-connector-j-8.0.31.jar /opt/tomcat/lib \
     && cp /tmp/mariadb-java-client-3.1.0.jar ${GUACAMOLE_HOME}/lib \
+    && cp /tmp/mariadb-java-client-3.1.0.jar /opt/tomcat/lib \
+    && cp /tmp/mariadb-java-client-3.1.0.jar /usr/share/java/ \
     && tar -xzf /tmp/guacamole-auth-totp-${GUAC_VER}.tar.gz \
     && cp -R guacamole-auth-totp-${GUAC_VER}/guacamole-auth-totp-${GUAC_VER}.jar ${GUACAMOLE_HOME}/extensions-available/ \
     && tar -xzf /tmp/guacamole-auth-jdbc-${GUAC_VER}.tar.gz \
