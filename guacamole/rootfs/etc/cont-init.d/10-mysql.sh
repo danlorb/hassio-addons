@@ -42,7 +42,7 @@ if bashio::config.true 'use_database'; then
 
     #Drop database based on config flag
     if bashio::config.true 'reset_database'; then
-        bashio::log.warning 'Recreating database'
+        bashio::log.info 'Recreating database'
         echo "DROP DATABASE IF EXISTS ${database};" | mysql -h "${host}" -P "${port}" -u "${username}" -p"${password}"
 
         #Remove reset_database option
@@ -50,8 +50,9 @@ if bashio::config.true 'use_database'; then
     fi
 
     bashio::log.info "Create database if not exists"
-    exists=$(mysql -h"$host" -P"$port" -u"$username" -p"$password" -e "SHOW DATABASES" | grep "$database")
-    if [ "$exists" != "$database" ]; then
+    exists=$(mysqlshow -h "${host}" -P "${port}" -u "${username}" -p"${password}" | grep "${database}" || true)
+    if [ -z "$exists" ]; then
+        bashio::log.info 'Database not exists. Creating database'
         echo "CREATE DATABASE IF NOT EXISTS ${database};" | mysql -h "${host}" -P "${port}" -u "${username}" -p"${password}"
         mysql -h "${host}" -P "${port}" -u "${username}" -p"${password}" "${database}" </app/guacamole/schema/001-create-schema.sql
         mysql -h "${host}" -P "${port}" -u "${username}" -p"${password}" "${database}" </app/guacamole/schema/002-create-admin-user.sql
@@ -59,6 +60,8 @@ if bashio::config.true 'use_database'; then
         echo "CREATE USER '${app_username}'@'%' IDENTIFIED BY '${app_password}';" | mysql -h "${host}" -P "${port}" -u "${username}" -p"${password}"
         echo "GRANT SELECT,INSERT,UPDATE,DELETE ON ${database}.* TO '${app_username}'@'%';" | mysql -h "${host}" -P "${port}" -u "${username}" -p"${password}"
         echo "FLUSH PRIVILEGES;" | mysql -h "${host}" -P "${port}" -u "${username}" -p"${password}"
+    else
+        bashio::log.info 'Database already exists. Nothing to do.'
     fi
 
     bashio::log.info 'Configure Database Settings'

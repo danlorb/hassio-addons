@@ -1,6 +1,6 @@
 ---
 name: guacamole
-version: 0.1.10
+version: 0.1.11
 stage: experimental
 slug: guacamole
 description: >-
