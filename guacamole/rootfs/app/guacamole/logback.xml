@@ -8,7 +8,8 @@
     </appender>
 
     <!-- Log at DEBUG level -->
-    <root level="debug">
+    <!-- debug, info, warn or error -->
+    <root level="warn">
         <appender-ref ref="GUAC-DEBUG"/>
     </root>
 
