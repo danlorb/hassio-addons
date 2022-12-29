@@ -8,9 +8,18 @@ declare port
 declare username
 declare password
 declare database="guacamole"
-configdir="/config/addons_config/guacamole"
 
 bashio::log.level "$(bashio::config 'log_level' 'warning')"
+
+host=$(bashio::services "mysql" "host")
+port=$(bashio::services "mysql" "port")
+username=$(bashio::services "mysql" "username")
+password=$(bashio::services "mysql" "password")
+
+app_username="guacamole"
+app_password=$(bashio::config 'database_password')
+
+configdir="/config/addons_config/guacamole"
 
 if bashio::config.true 'use_database'; then
 
@@ -31,14 +40,6 @@ if bashio::config.true 'use_database'; then
         rm -f "$configdir"/extensions/guacamole-auth-totp-1.4.0.jar || true
     fi
 
-    host=$(bashio::services "mysql" "host")
-    password=$(bashio::services "mysql" "password")
-    port=$(bashio::services "mysql" "port")
-    username=$(bashio::services "mysql" "username")
-
-    app_username="guacamole"
-    app_password=$(bashio::config 'database_password')
-
     #Drop database based on config flag
     if bashio::config.true 'reset_database'; then
         bashio::log.warning 'Recreating database'
@@ -48,7 +49,7 @@ if bashio::config.true 'use_database'; then
         bashio::addon.option 'reset_database'
     fi
 
-    # Create database if not exists
+    bashio::log.info "Create database if not exists"
     exists=$(mysql -h"$host" -P"$port" -u"$username" -p"$password" -e "SHOW DATABASES" | grep "$database")
     if [ "$exists" != "$database" ]; then
         echo "CREATE DATABASE IF NOT EXISTS ${database};" | mysql -h "${host}" -P "${port}" -u "${username}" -p"${password}"
@@ -59,8 +60,23 @@ if bashio::config.true 'use_database'; then
         echo "GRANT SELECT,INSERT,UPDATE,DELETE ON ${database}.* TO '${app_username}'@'localhost';" | mysql -h "${host}" -P "${port}" -u "${username}" -p"${password}"
         echo "FLUSH PRIVILEGES;" | mysql -h "${host}" -P "${port}" -u "${username}" -p"${password}"
     fi
+
+    bashio::log.info 'Configure Database Settings'
+    content=$(cat "${configdir}"/guacamole.properties)
+    content="${content//# mysql-hostname: null/mysql-hostname: ${host}}"
+    content="${content//# mysql-database: null/mysql-database: ${database}}"
+    content="${content//# mysql-username: null/mysql-username: ${app_username}}"
+    content="${content//# mysql-password: null/mysql-password: ${app_password}}"
+    echo "$content" > "${configdir}"/guacamole.properties
 else
     bashio::log.debug 'Disable Database and TOTP Extension'
     rm -f "$configdir"/extensions/guacamole-auth-jdbc-mysql-1.4.0.jar || true
     rm -f "$configdir"/extensions/guacamole-auth-totp-1.4.0.jar || true
+
+    content=$(cat "${configdir}"/guacamole.properties)
+    content="${content//mysql-hostname: ${host}/# mysql-hostname: null}"
+    content="${content//mysql-database: ${database}/# mysql-database: null}"
+    content="${content//mysql-username: ${app_username}/# mysql-username: null}"
+    content="${content//mysql-password: ${app_password}/# mysql-password: null}"
+    echo "$content" > "${configdir}"/guacamole.properties
 fi
