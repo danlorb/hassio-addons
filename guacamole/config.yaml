@@ -1,7 +1,7 @@
 ---
 name: guacamole
-version: 0.1.11
-stage: experimental
+version: 1.0.0
+stage: stable
 slug: guacamole
 description: >-
   Guacamole Remote Management boxed in a HA AddOn
