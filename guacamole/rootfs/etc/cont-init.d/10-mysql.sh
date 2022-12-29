@@ -49,13 +49,16 @@ if bashio::config.true 'use_database'; then
     fi
 
     # Create database if not exists
-    echo "CREATE DATABASE IF NOT EXISTS ${database};" | mysql -h "${host}" -P "${port}" -u "${username}" -p"${password}"
-    mysql -h "${host}" -P "${port}" -u "${username}" -p"${password}" "${database}" </app/guacamole/schema/001-create-schema.sql
-    mysql -h "${host}" -P "${port}" -u "${username}" -p"${password}" "${database}" </app/guacamole/schema/002-create-admin-user.sql
+    exists=$(mysql -h"$host" -P"$port" -u"$username" -p"$password" -e "SHOW DATABASES" | grep "$database")
+    if [ "$exists" != "$database" ]; then
+        echo "CREATE DATABASE IF NOT EXISTS ${database};" | mysql -h "${host}" -P "${port}" -u "${username}" -p"${password}"
+        mysql -h "${host}" -P "${port}" -u "${username}" -p"${password}" "${database}" </app/guacamole/schema/001-create-schema.sql
+        mysql -h "${host}" -P "${port}" -u "${username}" -p"${password}" "${database}" </app/guacamole/schema/002-create-admin-user.sql
 
-    echo "CREATE USER '${app_username}'@'localhost' IDENTIFIED BY '${app_password}';" | mysql -h "${host}" -P "${port}" -u "${username}" -p"${password}"
-    echo "GRANT SELECT,INSERT,UPDATE,DELETE ON ${database}.* TO '${app_username}'@'localhost';" | mysql -h "${host}" -P "${port}" -u "${username}" -p"${password}"
-    echo "FLUSH PRIVILEGES;" | mysql -h "${host}" -P "${port}" -u "${username}" -p"${password}"
+        echo "CREATE USER '${app_username}'@'localhost' IDENTIFIED BY '${app_password}';" | mysql -h "${host}" -P "${port}" -u "${username}" -p"${password}"
+        echo "GRANT SELECT,INSERT,UPDATE,DELETE ON ${database}.* TO '${app_username}'@'localhost';" | mysql -h "${host}" -P "${port}" -u "${username}" -p"${password}"
+        echo "FLUSH PRIVILEGES;" | mysql -h "${host}" -P "${port}" -u "${username}" -p"${password}"
+    fi
 else
     bashio::log.debug 'Disable Database and TOTP Extension'
     rm -f "$configdir"/extensions/guacamole-auth-jdbc-mysql-1.4.0.jar || true
