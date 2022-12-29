@@ -8,6 +8,7 @@ declare port
 declare username
 declare password
 declare database="guacamole"
+configdir="/config/addons_config/guacamole"
 
 bashio::log.level "$(bashio::config 'log_level' 'warning')"
 
@@ -19,15 +20,15 @@ if bashio::config.true 'use_database'; then
         bashio::exit.nok "Make sure the MariaDB add-on is installed and running"
     fi
 
-    bashio::log.warning 'Enable Database Extension'
-    cp -f /app/guacamole/extensions-available/guacamole-auth-jdbc-mysql-1.4.0.jar /app/guacamole/extensions || true
+    bashio::log.info 'Enable Database Extension'
+    cp -f "$configdir"/extensions-available/guacamole-auth-jdbc-mysql-1.4.0.jar "$configdir"/extensions || true
 
     if bashio::config.true 'use_totp'; then
-        bashio::log.warning 'Enable TOTP Extension'
-        cp -f /app/guacamole/extensions-available/guacamole-auth-totp-1.4.0.jar /app/guacamole/extensions || true
+        bashio::log.info 'Enable TOTP Extension'
+        cp -f "$configdir"/extensions-available/guacamole-auth-totp-1.4.0.jar "$configdir"/extensions || true
     else
         bashio::log.debug 'Disable TOTP Extension'
-        rm -f /app/guacamole/extensions/guacamole-auth-totp-1.4.0.jar || true
+        rm -f "$configdir"/extensions/guacamole-auth-totp-1.4.0.jar || true
     fi
 
     host=$(bashio::services "mysql" "host")
@@ -57,6 +58,6 @@ if bashio::config.true 'use_database'; then
     echo "FLUSH PRIVILEGES;" | mysql -h "${host}" -P "${port}" -u "${username}" -p"${password}"
 else
     bashio::log.debug 'Disable Database and TOTP Extension'
-    rm -f /app/guacamole/extensions/guacamole-auth-jdbc-mysql-1.4.0.jar || true
-    rm -f /app/guacamole/extensions/guacamole-auth-totp-1.4.0.jar || true
+    rm -f "$configdir"/extensions/guacamole-auth-jdbc-mysql-1.4.0.jar || true
+    rm -f "$configdir"/extensions/guacamole-auth-totp-1.4.0.jar || true
 fi
