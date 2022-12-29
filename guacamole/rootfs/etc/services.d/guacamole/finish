@@ -11,5 +11,4 @@ if [[ "${1}" -ne 0 ]] && [[ "${1}" -ne 256 ]]; then
   /run/s6/basedir/bin/halt
 fi
 
-bashio::log.info "Gucamole Interface stopped, restarting..."
-exec /opt/tomcat/bin/shutdown.sh
+bashio::log.info "Service restart after closing"

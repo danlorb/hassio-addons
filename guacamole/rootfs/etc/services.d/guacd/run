@@ -4,7 +4,11 @@
 # Runs the Guacamole Daemon interface
 # ==============================================================================
 
+prog="guacd"
+exec="/usr/local/sbin/$prog"
+pidfile="/var/run/$prog.pid"
+
 bashio::log.level "$(bashio::config 'log_level' 'warning')"
 
 bashio::log.info "Starting the Guacamole Daemon..."
-exec /app/guacamole/guacd start
+exec "$exec" -p "$pidfile" -f

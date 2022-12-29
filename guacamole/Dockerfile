@@ -97,7 +97,7 @@ RUN mkdir -p ${CATALINA_HOME} \
 # Install guacamole-server
 RUN tar -xzf /tmp/guacamole-server-${GUAC_VER}.tar.gz \
     && cd guacamole-server-${GUAC_VER} \
-    && ./configure --with-init-dir=${GUACAMOLE_HOME} \
+    && ./configure \
     && make -j$(getconf _NPROCESSORS_ONLN) \
     && make install \
     && cd .. \

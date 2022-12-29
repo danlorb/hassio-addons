@@ -20,11 +20,11 @@ if bashio::config.true 'use_database'; then
     fi
 
     bashio::log.warning 'Enable Database Extension'
-    cp -f /app/guacamole/extensions-available/guacamole-auth-jdbc-mysql-1.4.0.jar /app/guacamole/extensions
+    cp -f /app/guacamole/extensions-available/guacamole-auth-jdbc-mysql-1.4.0.jar /app/guacamole/extensions || true
 
     if bashio::config.true 'use_totp'; then
         bashio::log.warning 'Enable TOTP Extension'
-        cp -f /app/guacamole/extensions-available/guacamole-auth-totp-1.4.0.jar /app/guacamole/extensions
+        cp -f /app/guacamole/extensions-available/guacamole-auth-totp-1.4.0.jar /app/guacamole/extensions || true
     else
         bashio::log.debug 'Disable TOTP Extension'
         rm -f /app/guacamole/extensions/guacamole-auth-totp-1.4.0.jar || true
