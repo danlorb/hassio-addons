@@ -82,7 +82,7 @@ curl -SL https://apache.org/dyn/closer.lua/guacamole/${GUAC_VER}/binary/guacamol
 curl -SL https://apache.org/dyn/closer.lua/guacamole/${GUAC_VER}/binary/guacamole-auth-jdbc-${GUAC_VER}.tar.gz?action=download -o guacamole-auth-jdbc-${GUAC_VER}.tar.gz\n\
 curl -SL https://apache.org/dyn/closer.lua/guacamole/${GUAC_VER}/binary/guacamole-auth-totp-${GUAC_VER}.tar.gz?action=download -o guacamole-auth-totp-${GUAC_VER}.tar.gz\n\
 curl -SL https://apache.org/dyn/closer.lua/guacamole/${GUAC_VER}/binary/guacamole-${GUAC_VER}.war?action=download -o guacamole-${GUAC_VER}.war\n\
-curl -SL https://dlm.mariadb.com/2678616/Connectors/java/connector-java-3.1.0/mariadb-java-client-3.1.0.jar -o mariadb-java-client-3.1.0.jar \
+curl -SL https://dlm.mariadb.com/2678616/Connectors/java/connector-java-3.1.0/mariadb-java-client-3.1.0.jar -o mariadb-java-client-3.1.0.jar \n\
 curl -SL https://dev.mysql.com/get/Downloads/Connector-J/mysql-connector-j_8.0.31-1debian11_all.deb -o mysql-connector-j_8.0.31-1debian11_all.deb\n\
 " > /tmp/download.sh \
     && chmod +x /tmp/download.sh \
