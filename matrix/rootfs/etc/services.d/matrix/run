@@ -9,5 +9,9 @@ bashio::log.level "$(bashio::config 'log_level' 'warning')"
 config=/config/addons_config/matrix
 
 bashio::log.info "Starting Matrix Service..."
-rm /share/matrix/homeserver.pid || true
-exec /opt/venvs/matrix-synapse/bin/synctl start "$config"/homeserver.yaml
+if [ -f /share/matrix/homeserver.pid ]; then
+    rm /share/matrix/homeserver.pid || true
+fi
+
+export PYTHONPATH=/opt/venvs/matrix-synapse/lib/python3.9/site-packages/
+exec python3 -B -m synapse.app.homeserver -c "$config"/homeserver.yaml
