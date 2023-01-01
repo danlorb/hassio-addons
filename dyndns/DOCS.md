@@ -116,7 +116,6 @@ You have several options to get them answered:
   Assistant discussions and questions.
 - The Home Assistant [Community Forum][forum].
 - Join the [Reddit subreddit][reddit] in [/r/homeassistant][reddit]
-- The [Technitium documentation][dns]
 
 ## Authors & contributors
 
@@ -148,7 +147,6 @@ SOFTWARE.
 
 [addon-badge]: https://my.home-assistant.io/badges/supervisor_addon.svg
 [addon]: https://my.home-assistant.io/redirect/supervisor_addon/?addon=a0d7b954_nodered&repository_url=https%3A%2F%2Fgithub.com%2Fhassio-addons%2Frepository
-[dns]: https://technitium.com/dns/
 [discord-ha]: https://discord.gg/c5DvZ4e
 [forum]: https://community.home-assistant.io/t/home-assistant-community-add-on-node-red/55023?u=frenck
 [reddit]: https://reddit.com/r/homeassistant
