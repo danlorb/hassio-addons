@@ -126,11 +126,11 @@ RUN apt-get purge -y --auto-remove \
     && rm -rf \
         /etc/logrotate.d \
         /var/lib/apt/lists/* \
-        /root/.cache
-        # /tmp/apache* \
-        # /tmp/guacamole* \
-        # /tmp/mysql* \
-        # /tmp/mariadb*
+        /root/.cache \
+        /tmp/apache* \
+        /tmp/guacamole* \
+        /tmp/mysql* \
+        /tmp/mariadb*
 
 ENV GUACAMOLE_HOME=/config/addons_config/guacamole
 WORKDIR /
@@ -157,8 +157,8 @@ LABEL \
     org.opencontainers.image.authors="rolbre (https://github.com/rolbre)" \
     org.opencontainers.image.licenses="MIT" \
     org.opencontainers.image.url="https://github.com/rolbre" \
-    org.opencontainers.image.source="https://github.com/rolbre/hassio-addons/tree/main/dyndns" \
-    org.opencontainers.image.documentation="https://github.com/rolbre/hassio-addons/blob/main/dyndns/README.md" \
+    org.opencontainers.image.source="https://github.com/rolbre/hassio-addons/tree/main/guacamole" \
+    org.opencontainers.image.documentation="https://github.com/rolbre/hassio-addons/blob/main/guacamole/README.md" \
     org.opencontainers.image.created=${BUILD_DATE} \
     org.opencontainers.image.revision=${BUILD_REF} \
     org.opencontainers.image.version=${BUILD_VERSION}
