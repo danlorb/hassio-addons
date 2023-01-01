@@ -34,13 +34,12 @@ Guacamole Remote Management [Apache Guacamole](https://guacamole.apache.org/) bo
 
 ![amd64][amd64-badge]
 
-[aarch64-badge]: https://img.shields.io/badge/aarch64--green.svg?logo=arm
-[amd64-badge]: https://img.shields.io/badge/amd64--green.svg?logo=amd
-[armv7-badge]: https://img.shields.io/badge/armv7--green.svg?logo=arm
-[aarch64no-badge]: https://img.shields.io/badge/aarch64--orange.svg?logo=arm
-[amd64no-badge]: https://img.shields.io/badge/amd64--orange.svg?logo=amd
-[armv7no-badge]: https://img.shields.io/badge/armv7--orange.svg?logo=arm
-[ingress-badge]: https://img.shields.io/badge/-ingress-blueviolet.svg?logo=Ingress
+### Matrix
 
+[Matrix](https://matrix.org) is an open network for secure, decentralized communication boxed in a HA AddOn
+
+![amd64][amd64-badge]
+
+[amd64-badge]: https://img.shields.io/badge/amd64--green.svg?logo=amd
 [repository-badge]: https://img.shields.io/badge/Add%20repository%20to%20my-Home%20Assistant-41BDF5?logo=home-assistant&style=for-the-badge
 [repository-url]: https://my.home-assistant.io/redirect/supervisor_add_addon_repository/?repository_url=https%3A%2F%2Fgithub.com%2Frolbre%2Fhassio-addons

@@ -1,6 +1,6 @@
 # Home Assistant Add-on: Matrix
 
-[Matrix](https://matrix.org) is nn open network for secure, decentralized communication.
+[Matrix](https://matrix.org) is an open network for secure, decentralized communication.
 
 ![Supports amd64 Architecture][amd64-shield]
 

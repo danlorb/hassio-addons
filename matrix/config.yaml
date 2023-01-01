@@ -27,6 +27,6 @@ ports:
 options:
   log_level: info
 schema:
-  server_name: string
+  server_name: str
   report_stats: bool?
   log_level: list(trace|debug|info|notice|warning|error|fatal)?
