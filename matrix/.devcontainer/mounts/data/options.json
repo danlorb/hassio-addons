@@ -1,7 +1,5 @@
 {
-    "use_database": "false",
-    "reset_database": "false",
-    "database_password": "test_pw",
-    "use_totp": "false",
+    "server_name": "my.test.de",
+    "report_stats": "false",
     "log_level": "info"
 }

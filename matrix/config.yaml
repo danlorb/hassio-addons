@@ -1,6 +1,6 @@
 ---
 name: matrix
-version: 0.1.0
+version: 0.1.1
 stage: experimental
 slug: matrix
 description: >-
@@ -20,7 +20,6 @@ backup: hot
 map:
   - config:rw
   - share:rw
-  - media:rw
 ports:
   8008/tcp: 8008
   8448/tcp: 8448

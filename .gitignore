@@ -1,1 +1,4 @@
-guacamole/.devcontainer/mounts/config/addons_config/guacamole
+guacamole/.devcontainer/mounts/config/addons_config
+matrix/.devcontainer/mounts/config/addons_config
+matrix/.devcontainer/mounts/share/
+matrix/.devcontainer/mounts/media/
