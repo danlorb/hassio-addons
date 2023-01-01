@@ -55,7 +55,7 @@ loggers:
     synapse.storage.SQL:
         # beware: increasing this to DEBUG will make synapse log sensitive
         # information such as access tokens.
-        level: loglevelUpper
+        level: WARNING
 
 root:
     level: $loglevelUpper
