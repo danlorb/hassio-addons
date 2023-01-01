@@ -13,6 +13,6 @@ if [ -f /share/matrix/homeserver.pid ]; then
     rm /share/matrix/homeserver.pid || true
 fi
 
-#export PYTHONPATH=/opt/venvs/matrix-synapse/lib/python3.9/site-packages/
-#exec python3 -B -m synapse.app.homeserver -c "$config"/homeserver.yaml
-/opt/venvs/matrix-synapse/bin/synctl start "$config"/homeserver.yaml
+export PYTHONPATH=/opt/venvs/matrix-synapse/lib/python3.9/site-packages/
+exec python3 -B -m synapse.app.homeserver -c "$config"/homeserver.yaml
+#/opt/venvs/matrix-synapse/bin/synctl start "$config"/homeserver.yaml
