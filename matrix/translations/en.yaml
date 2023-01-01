@@ -1,0 +1,14 @@
+configuration:
+  log_level:
+    name: Log Level
+    description: Choose the Log Level
+  server_name:
+    name: Server Name
+    description: Server Name of the Matrix Instance (e.g. example.com)
+  report_stats:
+    name: Report Status
+    description: Should Status reported to matrix.org
+
+network:
+  8008/tcp: Matrix
+  8448/tcp: Matrix Federation

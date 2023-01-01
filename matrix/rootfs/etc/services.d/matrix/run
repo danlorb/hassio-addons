@@ -1,0 +1,12 @@
+#!/command/with-contenv bashio
+# ==============================================================================
+# Home Assistant Community Add-on: Matrix
+# Runs the Matrix Daemon
+# ==============================================================================
+
+bashio::log.level "$(bashio::config 'log_level' 'warning')"
+
+config=/config/addons_config/matrix
+
+bashio::log.info "Starting Matrix..."
+exec /opt/venvs/matrix-synapse/bin/synapse_homeserver -c "$config"/homeserver.yaml -D

@@ -1,0 +1,56 @@
+// For format details, see https://aka.ms/devcontainer.json. For config options, see the
+// README at: https://github.com/devcontainers/templates/tree/main/src/debian
+{
+    "name": "matrix",
+    "mounts": [
+        {
+            "source": "${localWorkspaceFolder}/.devcontainer/mounts/data",
+            "target": "/data",
+            "type": "bind"
+        },
+        {
+            "source": "${localWorkspaceFolder}/.devcontainer/mounts/config",
+            "target": "/config",
+            "type": "bind"
+        },
+        {
+            "source": "${localWorkspaceFolder}/.devcontainer/mounts/share",
+            "target": "/share",
+            "type": "bind"
+        },
+        {
+            "source": "${localWorkspaceFolder}/.devcontainer/mounts/media",
+            "target": "/media",
+            "type": "bind"
+        }
+    ],
+    "build": {
+        "dockerfile": "../Dockerfile",
+        "args": {
+            "BUILD_FROM": "ghcr.io/home-assistant/amd64-base-debian:bullseye"
+        }
+    },
+    "extensions": [
+        "rogalmic.bash-debug",
+        "lizebang.bash-extension-pack",
+        "mads-hartmann.bash-ide-vscode",
+        "bat-snippets.bat-snippets",
+        "jetmartin.bats",
+        "jeff-hykin.better-dockerfile-syntax",
+        "rpinski.shebang-snippets",
+        "foxundermoon.shell-format",
+        "timonwong.shellcheck",
+        "Remisa.shellman",
+        "redhat.vscode-xml",
+        "mikeburgh.xml-format",
+        "redhat.vscode-yaml",
+        "vscode-icons-team.vscode-icons",
+        "IBM.output-colorizer",
+        "eriklynd.json-tools",
+        "exiasr.hadolint"
+    ],
+    "postCreateCommand": "${containerWorkspaceFolder}/.devcontainer/post-create.sh",
+    "postStartCommand": "${containerWorkspaceFolder}/.devcontainer/post-start.sh",
+    "postAttachCommand": "${containerWorkspaceFolder}/.devcontainer/post-attach.sh",
+    "remoteUser": "root"
+}
