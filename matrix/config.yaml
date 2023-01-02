@@ -1,7 +1,7 @@
 ---
 name: matrix
-version: 0.1.5
-stage: experimental
+version: 1.0.0
+stage: stable
 slug: matrix
 description: >-
   An open network for secure, decentralized communication boxed in a HA AddOn
