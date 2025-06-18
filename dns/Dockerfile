@@ -26,6 +26,7 @@ RUN apt-get update \
     && apt-get install -qy --no-install-recommends \
         wget \
         curl \
+        icu-devtools \
     && curl -sSL https://dot.net/v1/dotnet-install.sh | bash /dev/stdin --install-dir /opt/dotnet --channel LTS --version latest --runtime aspnetcore \
     && wget -nv https://download.technitium.com/dns/DnsServerPortable.tar.gz \
     && mkdir -p /opt/dns \
