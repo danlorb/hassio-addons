@@ -8,6 +8,8 @@ description: >-
 url: https://github.com/rolbre/hassio-addons/tree/main/matrix
 arch:
   - amd64
+  - armv7
+  - aarch64
 codenotary: breitschaftroland@gmail.com
 host_network: false
 startup: services
