@@ -66,3 +66,9 @@
 ## 1.1.1
 
 - Remove some not really needed Ports
+
+## 1.2.0
+
+- Update to Debian Bookworm
+- Update Dotnet to 9.0
+- Add Raspberry PI Architecture

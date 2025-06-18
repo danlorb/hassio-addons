@@ -8,7 +8,6 @@ description: >-
 url: https://github.com/rolbre/hassio-addons/tree/main/dns
 arch:
   - amd64
-  - armv7
   - aarch64
 codenotary: breitschaftroland@gmail.com
 host_network: true
