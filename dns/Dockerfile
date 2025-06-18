@@ -26,7 +26,7 @@ RUN apt-get update \
     && apt-get install -qy --no-install-recommends \
         wget \
         curl \
-    && curl -sSL https://dot.net/v1/dotnet-install.sh | bash /dev/stdin --channel STS --version latest --runtime dotnet \
+    && curl -sSL https://dot.net/v1/dotnet-install.sh | bash /dev/stdin --install-dir /opt/dotnet --channel STS --version latest --runtime dotnet \
     && wget -nv https://download.technitium.com/dns/DnsServerPortable.tar.gz \
     && mkdir -p /opt/dns \
     && tar -zxf DnsServerPortable.tar.gz -C /opt/dns/ \
