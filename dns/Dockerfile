@@ -31,7 +31,7 @@ RUN apt-get update \
     && rm packages-microsoft-prod.deb \
     && apt-get update \
     && apt-get install -qy --no-install-recommends \
-        aspnetcore-runtime-7.0 \
+        aspnetcore-runtime-9.0 \
     && wget -nv https://download.technitium.com/dns/DnsServerPortable.tar.gz \
     && mkdir -p /opt/dns \
     && tar -zxf DnsServerPortable.tar.gz -C /opt/dns/ \
