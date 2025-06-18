@@ -30,4 +30,4 @@ currentIPv6=$(hostname -I | grep -oP '[a-f0-9:]+:+[a-f0-9]+' || true)
 bashio::log.info "Starting Dns/Dhcp Server..."
 bashio::log.info "Use IP '${currentIPv4}' for Home Assistant IPv4 DNS Server Konfiguration"
 bashio::log.info "Use IP '${currentIPv6}' for Home Assistant IPv6 DNS Server Konfiguration"
-exec /usr/bin/dotnet /opt/dns/DnsServerApp.dll /data/config
+exec dotnet /opt/dns/DnsServerApp.dll /data/config
