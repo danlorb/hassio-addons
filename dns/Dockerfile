@@ -26,12 +26,7 @@ RUN apt-get update \
     && apt-get install -qy --no-install-recommends \
         wget \
         curl \
-    && wget -nv https://packages.microsoft.com/config/debian/12/packages-microsoft-prod.deb -O packages-microsoft-prod.deb \
-    && dpkg -i packages-microsoft-prod.deb \
-    && rm packages-microsoft-prod.deb \
-    && apt-get update \
-    && apt-get install -qy --no-install-recommends \
-        aspnetcore-runtime-9.0 \
+    && curl -sSL https://dot.net/v1/dotnet-install.sh | bash /dev/stdin --channel STS --version latest --runtime aspnetcore
     && wget -nv https://download.technitium.com/dns/DnsServerPortable.tar.gz \
     && mkdir -p /opt/dns \
     && tar -zxf DnsServerPortable.tar.gz -C /opt/dns/ \

@@ -12,7 +12,7 @@ arch:
 codenotary: breitschaftroland@gmail.com
 host_network: true
 startup: system
-homeassistant: 2022.11.0
+homeassistant: 2025.05.5
 init: false
 advanced: true
 apparmor: true
