@@ -22,7 +22,3 @@ mkdir -p "${MONGODB_DATA}"
 # Redirect log output
 rm -f "${MONGODB_ROOT}/mongodb.err"
 ln -s /proc/1/fd/1 "${MONGODB_ROOT}/mongodb.err"
-
-if bashio::var.false "${NEW_INSTALL}"; then    
-    bashio::log.info "Using existing mongodb"
-fi
