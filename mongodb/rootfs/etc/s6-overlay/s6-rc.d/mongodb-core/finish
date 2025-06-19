@@ -1,4 +1,6 @@
 #!/command/with-contenv bashio
+# vim: ft=bash
+# shellcheck shell=bash
 # ==============================================================================
 # Home Assistant Community Add-on: MongoDb
 # Take down the S6 supervision tree when daemon fails

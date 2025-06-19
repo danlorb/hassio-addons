@@ -1,7 +1,9 @@
 #!/command/with-contenv bashio
+# vim: ft=bash
+# shellcheck shell=bash
 # ==============================================================================
-# Home Assistant Community Add-on: DynDns
-# Runs the DynDns
+# Home Assistant Community Add-on: MongoDB
+# Prepares MongoDb
 # ==============================================================================
 
 # Set Log Level
@@ -15,7 +17,7 @@ exec mongod \
     --port 27017 \
     --directoryperdb \
     --dbpath "${MONGODB_DATA}" \
-    --pidfilepath /run/mongodb/mongod.pid\
+    --pidfilepath /run/mongodb/mongod.pid \
     --timeZoneInfo /usr/share/zoneinfo \
     --nounixsocket \
     --noauth \

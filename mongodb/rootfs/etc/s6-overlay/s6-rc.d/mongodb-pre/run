@@ -1,5 +1,6 @@
 #!/command/with-contenv bashio
-
+# vim: ft=bash
+# shellcheck shell=bash
 # ==============================================================================
 # Pre-start initialization of MongoDB service
 # ==============================================================================
@@ -7,7 +8,7 @@ MONGODB_ROOT=/data
 MONGODB_DATA=/data/db
 NEW_INSTALL=false
 
-if ! bashio::fs.directory_exists "${MARIADB_DATA}"; then
+if ! bashio::fs.directory_exists "${MONGODB_DATA}"; then
     NEW_INSTALL=true
 fi
 
