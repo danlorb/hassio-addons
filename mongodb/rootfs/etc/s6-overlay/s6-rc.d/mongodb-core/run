@@ -20,7 +20,7 @@ exec mongod \
     --pidfilepath /run/mongodb/mongod.pid \
     --timeZoneInfo /usr/share/zoneinfo \
     --nounixsocket \
-    --auth \
+    --noauth \
     --noscripting \
     --tlsMode disabled \
     < /dev/null
