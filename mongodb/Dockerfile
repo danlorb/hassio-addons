@@ -8,6 +8,11 @@ ENV DEBIAN_FRONTEND noninteractive
 # Copy root filesystem
 COPY rootfs /
 
+# Corrects permissions for s6
+RUN if [ -d /etc/cont-init.d ]; then chmod -R 755 /etc/cont-init.d; fi && \
+    if [ -d /etc/s6-overlay/s6-rc.d ]; then chmod -R 755 /etc/s6-overlay/s6-rc.d; fi && \
+    if [ -f /entrypoint.sh ]; then chmod 755 /entrypoint.sh; fi
+
 # Set Workdir
 WORKDIR /
 
