@@ -23,6 +23,5 @@ exec mongod \
     --noauth \
     --noscripting \
     --tlsMode disabled \
-    --upgrade \
     < /dev/null
 
