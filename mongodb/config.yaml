@@ -10,7 +10,7 @@ arch:
   - amd64
   - aarch64
 codenotary: breitschaftroland@gmail.com
-host_network: false
+host_network: true
 startup: system
 init: false
 advanced: true
@@ -19,7 +19,7 @@ homeassistant: 2025.05.5
 panel_admin: true
 backup: hot
 ports:
-  - 27017/tcp: 27017
+  27017/tcp: 27017
 options:  
   log_level: info
 schema:  
