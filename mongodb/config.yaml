@@ -11,7 +11,6 @@ arch:
   - aarch64
 codenotary: breitschaftroland@gmail.com
 host_network: true
-full_access: true
 startup: system
 init: false
 advanced: true

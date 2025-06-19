@@ -22,10 +22,14 @@ RUN if [ -d /etc/cont-init.d ]; then chmod -R 755 /etc/cont-init.d; fi && \
 # Set Workdir
 WORKDIR /tmp
 
-RUN apt-get update \
+RUN set -x \
+    && export DEBIAN_FRONTEND=noninteractive \
+    && apt-get update \
     && apt-get install -qy --no-install-recommends \
-        gnupg \
         curl \
+        gnupg \
+        numactl \
+        procps \
     && curl -fsSL https://www.mongodb.org/static/pgp/server-8.0.asc | \
         gpg -o /usr/share/keyrings/mongodb-server-8.0.gpg --dearmor \
     && echo "deb [ arch=amd64,arm64 signed-by=/usr/share/keyrings/mongodb-server-8.0.gpg ] https://repo.mongodb.org/apt/ubuntu focal/mongodb-org/8.0 multiverse" | \
@@ -38,6 +42,10 @@ RUN apt-get update \
         /etc/logrotate.d \
         /var/lib/apt/lists/* \
         /root/.cache
+
+# ensure that glibc isn't using rseq so that google-tcmalloc can
+# https://www.mongodb.com/docs/manual/administration/tcmalloc-performance/#disable-glibc-rseq
+ENV GLIBC_TUNABLES glibc.pthread.rseq=0
 
 WORKDIR /
 
