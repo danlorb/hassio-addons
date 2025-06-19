@@ -1,7 +1,0 @@
-{
-    "use_database": "false",
-    "reset_database": "false",
-    "database_password": "test_pw",
-    "use_totp": "false",
-    "log_level": "info"
-}
