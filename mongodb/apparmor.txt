@@ -1,6 +1,6 @@
 #include <tunables/global>
 
-profile dyndns flags=(attach_disconnected,mediate_deleted) {
+profile dns flags=(attach_disconnected,mediate_deleted) {
   #include <abstractions/base>
 
   # Capabilities
@@ -46,6 +46,7 @@ profile dyndns flags=(attach_disconnected,mediate_deleted) {
   /data/** rw,
 
   # Execution program
+  /usr/bin/dotnet ix,
 
   # Supress PTrace denials when using 'docker ps' or using 'ps' inside a container
   ptrace (trace,read) peer=docker-default,

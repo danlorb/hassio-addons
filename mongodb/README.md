@@ -1,14 +1,13 @@
-# Home Assistant Add-on: DynDns Updater
+# Home Assistant Add-on: MongoDB
 
-DynDns Updater for Hetzner DNS Server.
+MongoDB
 
 ![Supports amd64 Architecture][amd64-shield]
 ![Supports aarch64 Architecture][aarch64-shield]
 
 ## About
 
-DynDns Updater to update your public IPv4 and IPv6 Addresses in Hetzner DNS Server. It works out-of-the-box with no or minimal configuration. For more information, please see [Hetzner DNS].
+MongoDB is a source-available, cross-platform, document-oriented database program. Classified as a NoSQL database product, MongoDB uses JSON-like documents with optional schemas. Released in February 2009 by 10gen (now MongoDB Inc.), it supports features like sharding, replication, and ACID transactions.
 
 [amd64-shield]: https://img.shields.io/badge/amd64-yes-green.svg
 [aarch64-shield]: https://img.shields.io/badge/aarch64-yes-green.svg
-[Hetzner DNS]: https://dns.hetzner.com/

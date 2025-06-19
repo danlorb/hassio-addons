@@ -11,30 +11,16 @@ arch:
   - aarch64
 codenotary: breitschaftroland@gmail.com
 host_network: false
-startup: services
+startup: system
 init: false
 advanced: true
 apparmor: true
 homeassistant: 2025.05.5
 panel_admin: true
 backup: hot
-options:
-  api_token: null
-  records:
-    - domain: "my-domain.com"
-      name: www
-      ttl: 3600
-      ipv4: true
-  interval: 1h
+ports:
+  - 27017/tcp: 27017
+options:  
   log_level: info
-schema:
-  api_token: str
-  interval: str
-  records:
-    - domain: str
-      name: str
-      ttl: int?
-      ipv4: bool?
-      ipv6: bool?
-  my_fritz_fqdn: str?
+schema:  
   log_level: list(trace|debug|info|notice|warning|error|fatal)?
