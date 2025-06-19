@@ -17,8 +17,12 @@ echo -n "${MONGODB_LOG}" > /var/run/s6/container_environment/MONGODB_LOG
 mkdir -p "${MONGODB_DATA}"
 mkdir -p "${MONGODB_LOG}"
 
+if [ -f "${MONGODB_DATA}/mongodb.err" ]; then
+    rm -f "${MONGODB_DATA}/mongodb.err"
+fi
+
 # Redirect errors
 ln -s /proc/1/fd/1 "${MONGODB_DATA}/mongodb.err"
 
 bashio::log.info "Start MongoDB ..."
-exec mongod --dbpath "${MONGODB_DATA}" --logpath "${MONGODB_LOG}"/mongod.log --fork
+exec mongod --dbpath "${MONGODB_DATA}" --logpath "${MONGODB_LOG}"/mongod.log
