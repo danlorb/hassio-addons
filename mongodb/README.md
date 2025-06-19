@@ -2,6 +2,10 @@
 
 MongoDB
 
+A really simple implementation of MongoDb without TLS and Auth.
+
+**Remarks:** Currently only MongoDb till Version 7.x works on Raspberry. Version 8.x has issues with tsmalloc.
+
 ![Supports amd64 Architecture][amd64-shield]
 ![Supports aarch64 Architecture][aarch64-shield]
 
