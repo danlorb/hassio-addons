@@ -25,4 +25,4 @@ fi
 ln -s /proc/1/fd/1 "${MONGODB_DATA}/mongodb.err"
 
 bashio::log.info "Start MongoDB ..."
-exec mongod --dbpath "${MONGODB_DATA}" --logpath "${MONGODB_LOG}"/mongod.log
+exec mongod --bind_ip_all --dbpath "${MONGODB_DATA}" --logpath "${MONGODB_LOG}"/mongod.log

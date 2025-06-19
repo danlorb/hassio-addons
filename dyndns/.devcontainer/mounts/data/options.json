@@ -1,5 +1,5 @@
 {
-    "api_token": "RavbqYw6xyjIP5k7ZsVDgWygn71jKdBJ",
+    "api_token": "<Hetzner DNS API Token>",
     "records": [
       {
         "domain": "x-breitschaft.de",
