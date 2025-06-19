@@ -1,6 +1,6 @@
 # Home Assistant Add-on: MongoDB
 
-MongoDB
+MongoDB Community Edition 7.x
 
 A really simple implementation of MongoDb without TLS and Auth.
 

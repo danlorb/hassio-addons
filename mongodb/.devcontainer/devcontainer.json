@@ -12,11 +12,6 @@
             "source": "${localWorkspaceFolder}/.devcontainer/mounts/config",
             "target": "/config",
             "type": "bind"
-        },
-        {
-            "source": "${localWorkspaceFolder}/rootfs/etc/dyndns/dyndns.sh",
-            "target": "/etc/dyndns/dyndns.sh",
-            "type": "bind"
         }
     ],
     "build": {
@@ -25,25 +20,29 @@
             "BUILD_FROM": "ghcr.io/home-assistant/amd64-base-ubuntu:20.04"
         }
     },
-    "extensions": [
-        "rogalmic.bash-debug",
-        "lizebang.bash-extension-pack",
-        "mads-hartmann.bash-ide-vscode",
-        "bat-snippets.bat-snippets",
-        "jetmartin.bats",
-        "jeff-hykin.better-dockerfile-syntax",
-        "rpinski.shebang-snippets",
-        "foxundermoon.shell-format",
-        "timonwong.shellcheck",
-        "Remisa.shellman",
-        "redhat.vscode-xml",
-        "mikeburgh.xml-format",
-        "redhat.vscode-yaml",
-        "vscode-icons-team.vscode-icons",
-        "IBM.output-colorizer",
-        "eriklynd.json-tools",
-        "exiasr.hadolint"
-    ],
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "rogalmic.bash-debug",
+                "lizebang.bash-extension-pack",
+                "mads-hartmann.bash-ide-vscode",
+                "bat-snippets.bat-snippets",
+                "jetmartin.bats",
+                "jeff-hykin.better-dockerfile-syntax",
+                "rpinski.shebang-snippets",
+                "foxundermoon.shell-format",
+                "timonwong.shellcheck",
+                "Remisa.shellman",
+                "redhat.vscode-xml",
+                "mikeburgh.xml-format",
+                "redhat.vscode-yaml",
+                "vscode-icons-team.vscode-icons",
+                "IBM.output-colorizer",
+                "eriklynd.json-tools",
+                "exiasr.hadolint"
+            ]
+        }
+    },
     "postCreateCommand": "${containerWorkspaceFolder}/.devcontainer/post-create.sh",
     "postStartCommand": "${containerWorkspaceFolder}/.devcontainer/post-start.sh",
     "postAttachCommand": "${containerWorkspaceFolder}/.devcontainer/post-attach.sh",

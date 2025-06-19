@@ -1,9 +1,9 @@
 ARG BUILD_FROM
 ARG BUILD_VERSION
-FROM ${BUILD_FROM}
+FROM ${BUILD_FROM:-ghcr.io/home-assistant/amd64-base-ubuntu:20.04}
 
 # Set some Environment Variables
-ENV DEBIAN_FRONTEND noninteractive
+ENV DEBIAN_FRONTEND=noninteractive
 
 # Copy root filesystem
 COPY rootfs /
@@ -42,11 +42,11 @@ RUN set -x \
 
 # ensure that glibc isn't using rseq so that google-tcmalloc can
 # https://www.mongodb.com/docs/manual/administration/tcmalloc-performance/#disable-glibc-rseq
-ENV GLIBC_TUNABLES glibc.pthread.rseq=0
+ENV GLIBC_TUNABLES=glibc.pthread.rseq=0
 
 # ensure that if running as custom user that "mongosh" has a valid "HOME"
 # https://github.com/docker-library/mongo/issues/524
-ENV HOME /data/db
+ENV HOME=/data/db
 
 ARG BUILD_ARCH
 ARG BUILD_DATE
