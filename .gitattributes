@@ -1,4 +1,3 @@
 *       text=auto
 *.sh    eol=lf
-/**/rootfs/**/finish    text eol=lf
-/**/rootfs/**/finish    text eol=run
+/**/rootfs    text eol=lf
