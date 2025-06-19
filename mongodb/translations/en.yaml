@@ -1,0 +1,34 @@
+configuration:
+  log_level:
+    name: Log Level
+    description: Choose the Log Level
+  api_token:
+    name: Hetzner DNS API Token
+    description: API TOKEN to access Hetzner DNS Server for DynDns Updates
+  interval:
+    name: Update Interval
+    description: Define here the Update Interval (e.g. 60s, 1h a.s.o.)
+  domains:
+    name: Domains
+    description: Collection for DNS Domains to update
+  domain:
+    name: Domain
+    description: DNS Domain Name to update
+  records:
+    name: DNS Records
+    description: Collection of Records for given Domain to update
+  record:
+    name: DNS Record
+    description: DNS Record to update (e.g. www)
+  ttl:
+    name: TTL
+    description: TTL for the DNS Record
+  ipv4:
+    name: IPv4
+    description: Only update A Record Types
+  ipv6:
+    name: IPv6
+    description: Only update AAAA Record Types
+  my_fritz_fqdn:
+    name: MyFritz FQDN
+    description: FQDN of your Fritz.box registerd by AVM

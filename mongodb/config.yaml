@@ -1,11 +1,11 @@
 ---
-name: DynDns
-version: 1.1.0
+name: MongoDB
+version: 1.0.0
 stage: stable
-slug: dyndns
+slug: mongodb
 description: >-
-  DynDns Updater for Hetzner Dns Server
-url: https://github.com/rolbre/hassio-addons/tree/main/dyndns
+  MongoDB is a source-available, cross-platform, document-oriented database program
+url: https://github.com/rolbre/hassio-addons/tree/main/mongodb
 arch:
   - amd64
   - aarch64
