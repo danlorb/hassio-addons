@@ -1,0 +1,27 @@
+#!/command/with-contenv bashio
+
+# ==============================================================================
+# Pre-start initialization of MongoDB service
+# ==============================================================================
+MONGODB_ROOT=/data
+MONGODB_DATA=/data/db
+NEW_INSTALL=false
+
+if ! bashio::fs.directory_exists "${MARIADB_DATA}"; then
+    NEW_INSTALL=true
+fi
+
+# Save variables
+echo -n "${MONGODB_DATA}" > /var/run/s6/container_environment/MONGODB_DATA
+echo -n "${NEW_INSTALL}" > /var/run/s6/container_environment/NEW_INSTALL
+
+# Create folders
+mkdir -p "${MONGODB_DATA}"
+
+# Redirect log output
+rm -f "${MONGODB_ROOT}/mongodb.err"
+ln -s /proc/1/fd/1 "${MONGODB_ROOT}/mongodb.err"
+
+if bashio::var.false "${NEW_INSTALL}"; then    
+    bashio::log.info "Using existing mongodb"
+fi

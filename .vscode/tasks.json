@@ -4,7 +4,7 @@
         {
             "label": "Build Image",
             "type": "shell",
-            "command": "docker build --build-arg BUILD_FROM='ghcr.io/home-assistant/amd64-base-debian:bullseye' --tag 'rolbre/${input:project_name}:latest' .",
+            "command": "docker build --build-arg BUILD_FROM='ghcr.io/home-assistant/amd64-base-debian:bullseye' --tag 'danlorb/${input:project_name}:latest' .",
             "options": {
                 "cwd": "${workspaceFolder}/${input:project_name}"
             },
@@ -13,13 +13,13 @@
         {
             "label": "Run Image",
             "type": "shell",
-            "command": "docker run -d --rm -v '${workspaceFolder}/${input:project_name}/.devcontainer/mounts/data:/data' 'rolbre/${input:project_name}:latest'",
+            "command": "docker run -d --rm -v '${workspaceFolder}/${input:project_name}/.devcontainer/mounts/data:/data' 'danlorb/${input:project_name}:latest'",
             "problemMatcher": []
         },
         {
             "label": "Run Image with Ports",
             "type": "shell",
-            "command": "docker run -d --rm -p '${input:addon_ports}' -v '${workspaceFolder}/${input:project_name}/.devcontainer/mounts/data:/data' 'rolbre/${input:project_name}:latest'",
+            "command": "docker run -d --rm -p '${input:addon_ports}' -v '${workspaceFolder}/${input:project_name}/.devcontainer/mounts/data:/data' 'danlorb/${input:project_name}:latest'",
             "problemMatcher": []
         }
     ],

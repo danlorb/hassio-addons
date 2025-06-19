@@ -5,7 +5,7 @@ stage: stable
 slug: dns
 description: >-
   Self host a Dns/Dhcp server for privacy & security
-url: https://github.com/rolbre/hassio-addons/tree/main/dns
+url: https://github.com/danlorb/hassio-addons/tree/main/dns
 arch:
   - amd64
   - aarch64

@@ -146,7 +146,7 @@ You have several options to get them answered:
 
 ## Authors & contributors
 
-The original setup of this repository is by [Roland Breitschaft][rolbre].
+The original setup of this repository is by [Roland Breitschaft][danlorb].
 
 ## License
 
@@ -178,4 +178,4 @@ SOFTWARE.
 [discord-ha]: https://discord.gg/c5DvZ4e
 [forum]: https://community.home-assistant.io/t/home-assistant-community-add-on-node-red/55023?u=frenck
 [reddit]: https://reddit.com/r/homeassistant
-[rolbre]: https://github.com/rolbre
+[danlorb]: https://github.com/danlorb

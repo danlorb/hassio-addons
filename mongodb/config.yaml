@@ -5,7 +5,7 @@ stage: stable
 slug: mongodb
 description: >-
   MongoDB is a source-available, cross-platform, document-oriented database program
-url: https://github.com/rolbre/hassio-addons/tree/main/mongodb
+url: https://github.com/danlorb/hassio-addons/tree/main/mongodb
 arch:
   - amd64
   - aarch64

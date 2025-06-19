@@ -19,6 +19,12 @@ RUN if [ -d /etc/cont-init.d ]; then chmod -R 755 /etc/cont-init.d; fi && \
     if [ -d /etc/services.d ]; then chmod -R 755 /etc/services.d; fi && \
     if [ -f /entrypoint.sh ]; then chmod 755 /entrypoint.sh; fi
 
+RUN set -eux; \
+	groupadd --gid 999 --system mongodb; \
+	useradd --uid 999 --system --gid mongodb --home-dir /data/db mongodb; \
+	mkdir -p /data/db /data/configdb; \
+	chown -R mongodb:mongodb /data/db /data/configdb
+
 # Set Workdir
 WORKDIR /tmp
 
@@ -28,7 +34,11 @@ RUN set -x \
     && apt-get install -qy --no-install-recommends \
         curl \
         gnupg \
+        jq \
+        libcurl4 \
+        liblzma5 \
         numactl \
+        openssl \
         procps \
     && curl -fsSL https://www.mongodb.org/static/pgp/server-7.0.asc | \
         gpg -o /usr/share/keyrings/mongodb-server-7.0.gpg --dearmor \
@@ -47,6 +57,10 @@ RUN set -x \
 # https://www.mongodb.com/docs/manual/administration/tcmalloc-performance/#disable-glibc-rseq
 ENV GLIBC_TUNABLES glibc.pthread.rseq=0
 
+# ensure that if running as custom user that "mongosh" has a valid "HOME"
+# https://github.com/docker-library/mongo/issues/524
+ENV HOME /data/db
+
 WORKDIR /
 
 ARG BUILD_ARCH
@@ -64,15 +78,15 @@ LABEL \
     io.hass.arch="${BUILD_ARCH}" \
     io.hass.type="addon" \
     io.hass.version=${BUILD_VERSION} \
-    maintainer="rolbre (https://github.com/rolbre)" \
+    maintainer="danlorb (https://github.com/danlorb)" \
     org.opencontainers.image.title="${BUILD_NAME}" \
     org.opencontainers.image.description="${BUILD_DESCRIPTION}" \
     org.opencontainers.image.vendor="Home Assistant Add-ons" \
-    org.opencontainers.image.authors="rolbre (https://github.com/rolbre)" \
+    org.opencontainers.image.authors="danlorb (https://github.com/danlorb)" \
     org.opencontainers.image.licenses="MIT" \
-    org.opencontainers.image.url="https://github.com/rolbre" \
-    org.opencontainers.image.source="https://github.com/rolbre/hassio-addons/tree/main/dyndns" \
-    org.opencontainers.image.documentation="https://github.com/rolbre/hassio-addons/blob/main/dyndns/README.md" \
+    org.opencontainers.image.url="https://github.com/danlorb" \
+    org.opencontainers.image.source="https://github.com/danlorb/hassio-addons/tree/main/mongodb" \
+    org.opencontainers.image.documentation="https://github.com/danlorb/hassio-addons/blob/main/mongodb/README.md" \
     org.opencontainers.image.created=${BUILD_DATE} \
     org.opencontainers.image.revision=${BUILD_REF} \
     org.opencontainers.image.version=${BUILD_VERSION}

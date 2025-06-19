@@ -1,0 +1,26 @@
+#!/command/with-contenv bashio
+# ==============================================================================
+# Home Assistant Community Add-on: DynDns
+# Runs the DynDns
+# ==============================================================================
+
+# Set Log Level
+bashio::log.level "$(bashio::config 'log_level' 'warning')"
+
+mkdir -p /run/mongodb
+
+bashio::log.info "Start MongoDB ..."
+exec mongod \
+    --bind_ip_all \
+    --port 27017 \
+    --directoryperdb \
+    --dbpath "${MONGODB_DATA}" \
+    --pidfilepath /run/mongodb/mongod.pid\
+    --timeZoneInfo /usr/share/zoneinfo \
+    --nounixsocket \
+    --noauth \
+    --noscripting \
+    --tlsMode disabled \
+    --upgrade \
+    < /dev/null
+
