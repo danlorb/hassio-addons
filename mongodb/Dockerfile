@@ -4,32 +4,14 @@ FROM ${BUILD_FROM}
 
 # Set some Environment Variables
 ENV DEBIAN_FRONTEND noninteractive
-ENV S6_CMD_WAIT_FOR_SERVICES 1
-ENV S6_CMD_WAIT_FOR_SERVICES_MAXTIME 0
-ENV S6_SERVICES_GRACETIME 0
-
-# Set shell
-SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 
 # Copy root filesystem
 COPY rootfs /
 
-# Corrects permissions for s6
-RUN if [ -d /etc/cont-init.d ]; then chmod -R 755 /etc/cont-init.d; fi && \
-    if [ -d /etc/services.d ]; then chmod -R 755 /etc/services.d; fi && \
-    if [ -f /entrypoint.sh ]; then chmod 755 /entrypoint.sh; fi
-
-RUN set -eux; \
-	groupadd --gid 999 --system mongodb; \
-	useradd --uid 999 --system --gid mongodb --home-dir /data/db mongodb; \
-	mkdir -p /data/db /data/configdb; \
-	chown -R mongodb:mongodb /data/db /data/configdb
-
 # Set Workdir
-WORKDIR /tmp
+WORKDIR /
 
 RUN set -x \
-    && export DEBIAN_FRONTEND=noninteractive \
     && apt-get update \
     && apt-get install -qy --no-install-recommends \
         curl \
@@ -60,8 +42,6 @@ ENV GLIBC_TUNABLES glibc.pthread.rseq=0
 # ensure that if running as custom user that "mongosh" has a valid "HOME"
 # https://github.com/docker-library/mongo/issues/524
 ENV HOME /data/db
-
-WORKDIR /
 
 ARG BUILD_ARCH
 ARG BUILD_DATE
