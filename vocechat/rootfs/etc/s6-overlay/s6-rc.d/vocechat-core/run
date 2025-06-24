@@ -5,6 +5,10 @@
 # Set Log Level
 bashio::log.level "$(bashio::config 'log_level' 'warning')"
 
-bashio::log.info "Start VoceChat ..."
-exec vocechat-server /etc/vocechat/config.toml --daemon
+mkdir -p /run/vocechat
 
+bashio::log.info "Start VoceChat ..."
+exec vocechat-server /etc/vocechat/config.toml \
+    --pid.file /run/vocechat/vocechat.pid
+
+# --network.frontend_url
