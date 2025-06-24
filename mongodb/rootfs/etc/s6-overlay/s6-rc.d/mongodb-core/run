@@ -16,7 +16,7 @@ exec mongod \
     --bind_ip_all \
     --port 27017 \
     --directoryperdb \
-    --dbpath "${MONGODB_DATA}" \
+    --dbpath "${DATA_ROOT}" \
     --pidfilepath /run/mongodb/mongod.pid \
     --timeZoneInfo /usr/share/zoneinfo \
     --nounixsocket \
