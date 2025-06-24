@@ -4,7 +4,7 @@
 url = "https://sh.voce.chat/web_client/v0.4.x"
 
 [system]
-data_dir = "./data"
+data_dir = "/data/db"
 token_expiry_seconds = 300
 refresh_token_expiry_seconds = 864000000
 
@@ -37,11 +37,11 @@ bind = "0.0.0.0:3000"
 
 [template.register_by_email]
 subject = "Register code"
-file = "templates/register_by_email.html"
+file = "/etc/vocechat/templates/register_by_email.html"
 
 [template.login_by_email]
 subject = "Your sign-in link for Vocechat"
-file = "templates/login_by_email.html"
+file = "/etc/vocechat/templates/login_by_email.html"
 
 #[[user]]
 #name = "Guest"
