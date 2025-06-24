@@ -21,25 +21,34 @@ If you want to do add the repository manually, please follow the procedure highl
 Greate Dns/Dhcp Server provided by [Technitium](https://technitium.com/dns) boxed in a HA AddOn
 
 ![amd64][amd64-badge]
+![aarch64][aarch64-badge]
 
 ### DynDns Updater for Hetzner DNS Server
 
 DynDns Updater to update your public IP in [Hetzner DNS Servers](https://dns.hetzner.com/) boxed in a HA AddOn
 
 ![amd64][amd64-badge]
+![aarch64][aarch64-badge]
 
-### Guacamole
+### MongoDb Community Edition 7.x
 
-Guacamole Remote Management [Apache Guacamole](https://guacamole.apache.org/) boxed in a HA AddOn
+A really simple implementation of MongoDb without TLS and Auth.
 
-![amd64][amd64-badge]
-
-### Matrix
-
-[Matrix](https://matrix.org) is an open network for secure, decentralized communication boxed in a HA AddOn
+**Remarks:** Currently only MongoDb till Version 7.x works on Raspberry. Version 8.x has issues with tsmalloc.
 
 ![amd64][amd64-badge]
+![aarch64][aarch64-badge]
+
+### VoceChat
+
+[VoceChat](https://voce.chat/) VoceChat is a superlight Rust powered chat app, API and SDK that prioritizes private hosting. Build your own in-app messaging feature with VoceChat!
+
+![amd64][amd64-badge]
+![aarch64][aarch64-badge]
 
 [amd64-badge]: https://img.shields.io/badge/amd64--green.svg?logo=amd
+[aarch64-badge]: https://img.shields.io/badge/aarch64--green.svg
+
 [repository-badge]: https://img.shields.io/badge/Add%20repository%20to%20my-Home%20Assistant-41BDF5?logo=home-assistant&style=for-the-badge
+
 [repository-url]: https://my.home-assistant.io/redirect/supervisor_add_addon_repository/?repository_url=https%3A%2F%2Fgithub.com%2Fdanlorb%2Fhassio-addons

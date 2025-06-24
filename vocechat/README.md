@@ -1,15 +1,17 @@
-# Home Assistant Add-on: Zulip Server
+# Home Assistant Add-on: VoceChat Server
 
-Technitium Dns/Dhcp Server for Home Assistant.
+VoceChat 0.4.x
+
+A really simple implementation of VoceChat without TLS and Auth.
 
 ![Supports amd64 Architecture][amd64-shield]
 ![Supports aarch64 Architecture][aarch64-shield]
 
 ## About
 
-Technitium DNS Server is an open source authoritative as well as recursive DNS server that can be used for self hosting a Dns/Dhcp Server for privacy & security. It works out-of-the-box with no or minimal configuration and provides a user friendly web console accessible using any modern web browser. For more information, please see [Technitium DNS].
+VoceChat is a superlight Rust powered chat app, API and SDK that prioritizes private hosting. Build your own in-app messaging feature with VoceChat!. For more information, please see [VoceChat].
 
-[Technitium DNS]: https://technitium.com/dns/
+[VoceChat]: https://voce.chat/
 [amd64-shield]: https://img.shields.io/badge/amd64-yes-green.svg
 [aarch64-shield]: https://img.shields.io/badge/aarch64-yes-green.svg
 
