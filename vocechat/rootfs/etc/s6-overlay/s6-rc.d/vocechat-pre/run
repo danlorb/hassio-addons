@@ -1,0 +1,21 @@
+#!/command/with-contenv bashio
+# vim: ft=bash
+# shellcheck shell=bash
+ROOT=/data
+DATA_ROOT=/data/db
+NEW_INSTALL=false
+
+if ! bashio::fs.directory_exists "${DATA_ROOT}"; then
+    NEW_INSTALL=true
+fi
+
+# Save variables
+echo -n "${DATA_ROOT}" > /var/run/s6/container_environment/DATA_ROOT
+echo -n "${NEW_INSTALL}" > /var/run/s6/container_environment/NEW_INSTALL
+
+# Create folders
+mkdir -p "${DATA_ROOT}"
+
+# Redirect log output
+rm -f "${ROOT}/app.err"
+ln -s /proc/1/fd/1 "${ROOT}/app.err"

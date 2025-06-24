@@ -1,0 +1,30 @@
+---
+name: VoceChat
+version: 1.0.0
+stage: stable
+slug: vocechat
+panel_icon: mdi:chat
+description: >-
+  VoceChat is a superlight Rust powered chat app, API and SDK that prioritizes private hosting. Build your own in-app messaging feature with VoceChat!
+url: https://github.com/danlorb/hassio-addons/tree/main/vocechat
+arch:
+  - amd64
+  - aarch64
+codenotary: breitschaftroland@gmail.com
+host_network: true
+startup: system
+homeassistant: 2025.05.5
+init: false
+advanced: true
+apparmor: true
+panel_admin: true
+backup: hot
+backup_exclude:
+  - "/data/logs/*.log"
+watchdog: tcp://[HOST]:3000
+ports:
+  3000/tcp: 3000
+options:  
+  log_level: info
+schema:
+  log_level: list(trace|debug|info|notice|warning|error|fatal)?
