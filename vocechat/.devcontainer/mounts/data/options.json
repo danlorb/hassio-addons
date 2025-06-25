@@ -1,3 +1,4 @@
 {
+    "domain": "my-domain.com",
     "log_level": "info"    
 }

@@ -9,9 +9,12 @@ if ! bashio::fs.directory_exists "${DATA_ROOT}"; then
     NEW_INSTALL=true
 fi
 
+bashio::config.has_value 'domain' && DOMAIN=$(bashio::config 'domain') && bashio::log.info 'Domain set'
+
 # Save variables
 echo -n "${DATA_ROOT}" > /var/run/s6/container_environment/DATA_ROOT
 echo -n "${NEW_INSTALL}" > /var/run/s6/container_environment/NEW_INSTALL
+echo -n "${DOMAIN}" > /var/run/s6/container_environment/DOMAIN
 
 # Create folders
 mkdir -p "${DATA_ROOT}"

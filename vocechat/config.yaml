@@ -25,6 +25,8 @@ watchdog: tcp://[HOST]:3000
 ports:
   3000/tcp: 3000
 options:  
+  domain: homeassistant.local
   log_level: info
 schema:
+  domain: str
   log_level: list(trace|debug|info|notice|warning|error|fatal)?
